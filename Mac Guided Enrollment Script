@@ -1,9 +1,30 @@
 #!/bin/bash
 
+# Define checklist items
+checklist=("Username Check" "Network Rename" "Device Rename" "Computer
+Rename" "Script Wrap-Up")
+checklist_status=(0 0 0 0 0)
+
+# Loop through checklist items and display them with checkboxes
+checklistrender () {
+        clear
+        for ((i=0; i<${#checklist[@]}; i++)); do
+            if [[ ${checklist_status[$i]} -eq 1 ]]; then
+                checkbox="[x]"
+            else
+                checkbox="[ ]"
+            fi
+            echo "$checkbox ${checklist[$i]}"
+        done
+}
+
 if [ $(whoami) != '_applecore' ]; then
 	osascript -e 'display dialog "Login as _applecore to run this script"'
 	exit 1
 fi
+
+checklist_status=(1 0 0 0 0)
+checklistrender
 
 # Get the full name of the logged-in account
 osascript -e 'display notification "Applying JAMF naming convention..." with title "Script Progress"'
@@ -11,8 +32,18 @@ full_name=$(dscl . -read /Users/$(id -un 502) RealName | awk -F': ' '{print $2}'
 
 # Set HostName, ComputerName, and LocalHostName to the full name
 sudo scutil --set HostName "$full_name"
+
+checklist_status=(1 1 0 0 0)
+checklistrender
+
 sudo scutil --set ComputerName "$full_name"
+checklist_status=(1 1 1 0 0)
+checklistrender
 sudo scutil --set LocalHostName "$full_name"
+checklist_status=(1 1 1 1 0)
+checklistrender
+
+
 osascript -e 'display notification "Naming convention updated" with title "Script Progress"'
 
 # Run the command to renew enrollment
@@ -22,7 +53,7 @@ sudo profiles renew -type enrollment
 osascript -e 'display notification "User enrollment complete" with title "Script Progress"'
 
 osascript -e 'display dialog "Script execution complete"'
-# Makes the local user admin
-# osascript -e 'display notification "Making local user admin..." with title "Script Progress"'
-# sudo dscl . -append /groups/admin GroupMembership $(id -un 502)
-# osascript -e 'display notification "Local user registered as admin" with title "Script Progress"'
+
+checklist_status=(1 1 1 1 1)
+
+checklistrender
