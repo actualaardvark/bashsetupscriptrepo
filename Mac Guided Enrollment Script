@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [ $(whoami) != '_applecore' ]; then
+	osascript -e 'display dialog "Login as _applecore to run this script"'
+	exit 1
+fi
+
+# Get the full name of the logged-in account
+osascript -e 'display notification "Applying JAMF naming convention..." with title "Script Progress"'
+full_name=$(dscl . -read /Users/$(id -un 502) RealName | awk -F': ' '{print $2}')
+
+# Set HostName, ComputerName, and LocalHostName to the full name
+sudo scutil --set HostName "$full_name"
+sudo scutil --set ComputerName "$full_name"
+sudo scutil --set LocalHostName "$full_name"
+osascript -e 'display notification "Naming convention updated" with title "Script Progress"'
+
+# Run the command to renew enrollment
+osascript -e 'display notification "Beginning user enrollment..." with title "Script Progress"'
+sudo profiles renew -type enrollment
+
+osascript -e 'display notification "User enrollment complete" with title "Script Progress"'
+
+osascript -e 'display dialog "Script execution complete"'
+# Makes the local user admin
+# osascript -e 'display notification "Making local user admin..." with title "Script Progress"'
+# sudo dscl . -append /groups/admin GroupMembership $(id -un 502)
+# osascript -e 'display notification "Local user registered as admin" with title "Script Progress"'
