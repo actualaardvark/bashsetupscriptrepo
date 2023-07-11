@@ -9,10 +9,10 @@ newupdaterhash=${newupdater%% *}
 if [ "$oldupdaterhash" != "$newupdaterhash" ]; then
 	echo "Updater out of date"
 	cat updateandrun.sh > /volumes/"Install macOS Ventura"/updateandrun
-	chmod +x /volumes/"install Mac OS ventura"/updateandrun
+	chmod +x /volumes/"install MacOS ventura"/updateandrun
 	rm updateandrun.sh
 	osascript -e 'display notification "Updater out of date" with title "Restarting Script"'
-	sh /volumes/"install Mac OS ventura"/updateandrun
+	sh /volumes/"install MacOS ventura"/updateandrun
 	exit 1
 else
 	echo "Updater is on the latest version"
