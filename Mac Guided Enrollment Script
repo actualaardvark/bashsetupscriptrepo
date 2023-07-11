@@ -1,4 +1,27 @@
 #!/bin/bash
+curl https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/updateandrun > updateandrun.sh
+
+oldupdater=$(shasum -a 256 /volumes/"Install macOS Ventura"/updateandrun)
+newupdater=$(shasum -a 256 updateandrun.sh)
+oldupdaterhash=${oldupdater%% *}
+newupdaterhash=${newupdater%% *}
+
+if [ "$oldupdaterhash" != "$newupdaterhash" ]; then
+	echo "Updater out of date"
+	cat updateandrun.sh > /volumes/"Install macOS Ventura"/updateandrun
+	chmod +x /volumes/"install Mac OS ventura"/updateandrun
+	rm updateandrun.sh
+	osascript -e 'display notification "Updater out of date" with title "Restarting Script"'
+	sh /volumes/"install Mac OS ventura"/updateandrun
+	exit 1
+else
+	echo "Updater is on the latest version"
+fi
+
+if [ $(whoami) != '_applecore' ]; then
+	osascript -e 'display dialog "Login as _applecore to run this script"'
+	exit 1
+fi
 
 # Define checklist items
 checklist=("Username Check" "Network Rename" "Device Rename" "Computer
