@@ -1,5 +1,5 @@
 curl https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Mac%20Guided%20Enrollment%20Script > setup.sh
 chmod +x setup.sh
-echo "Script Updated"
+open "https://imgs.xkcd.com/comics/automation_2x.png"
 sh "setup.sh"
 rm setup.sh
