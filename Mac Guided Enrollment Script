@@ -80,3 +80,5 @@ osascript -e 'display dialog "Script execution complete"'
 checklist_status=(1 1 1 1 1)
 
 checklistrender
+
+sudo dseditgroup -o edit -d $(id -un 502) -t user admin
