@@ -1,0 +1,16 @@
+#!/usr/local/bin/python3
+
+
+import subprocess
+users = subprocess.check_output(['dscl', '.', 'list', '/Users'])
+
+users = users.decode().split('\n')
+
+final = []
+
+for i in users:
+	if i:
+		if i[0] != "_" and i[0] != "#":
+			final.append(i)
+for i in final:
+	print(i)
