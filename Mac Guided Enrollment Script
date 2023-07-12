@@ -1,6 +1,7 @@
 #!/bin/bash
 curl https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/updateandrun > updateandrun.sh
 
+full_name=$(dscl . -read /Users/$(id -un 502) RealName | awk -F': ' '{print $2}')
 oldupdater=$(shasum -a 256 /volumes/"Install macOS Ventura"/updateandrun)
 newupdater=$(shasum -a 256 updateandrun.sh)
 oldupdaterhash=${oldupdater%% *}
@@ -51,7 +52,6 @@ checklistrender
 
 # Get the full name of the logged-in account
 osascript -e 'display notification "Applying JAMF naming convention..." with title "Script Progress"'
-full_name=$(dscl . -read /Users/$(id -un 502) RealName | awk -F': ' '{print $2}')
 
 # Set HostName, ComputerName, and LocalHostName to the full name
 sudo scutil --set HostName "$full_name"
