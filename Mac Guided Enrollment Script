@@ -2,6 +2,8 @@
 curl https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/updateandrun > updateandrun.sh
 
 full_name=$(dscl . -read /Users/$(id -un 502) RealName | awk -F': ' '{print $2}')
+level = ${full_name:0:3}
+
 oldupdater=$(shasum -a 256 /volumes/"Install macOS Ventura"/updateandrun)
 newupdater=$(shasum -a 256 updateandrun.sh)
 oldupdaterhash=${oldupdater%% *}
@@ -80,5 +82,9 @@ osascript -e 'display dialog "Script execution complete"'
 checklist_status=(1 1 1 1 1)
 
 checklistrender
-
-sudo dseditgroup -o edit -d $(id -un 502) -t user admin
+if [ "$level" = "NLS" ]; then
+	sudo dseditgroup -o edit -d $(id -un 502) -t user admin
+fi
+if [ "$level" = "NMS" ]; then
+	sudo dseditgroup -o edit -d $(id -un 502) -t user admin
+fi
