@@ -82,9 +82,4 @@ osascript -e 'display dialog "Script execution complete"'
 checklist_status=(1 1 1 1 1)
 
 checklistrender
-if [ "$level" = "NLS" ]; then
-	sudo dseditgroup -o edit -d $(id -un 502) -t user admin
-fi
-if [ "$level" = "NMS" ]; then
-	sudo dseditgroup -o edit -d $(id -un 502) -t user admin
-fi
+sudo dseditgroup -o edit -d $(id -un 502) -t user admin
