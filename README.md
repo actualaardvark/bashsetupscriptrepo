@@ -5,4 +5,5 @@ curl "https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/
 ```
 
 ![How I felt writing this](https://imgs.xkcd.com/comics/automation_2x.png)
+
 [Credit](https://xkcd.com/1319/)
