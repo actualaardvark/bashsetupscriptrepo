@@ -46,7 +46,7 @@ full_name=$(dscl . -read /Users/$(id -un 502) RealName | awk -F': ' '{print $2}'
 # The first 3 letters of the user account's full name
 userlevel = ${full_name:0:3}
 # Define checklist items
-checklist=("Installer Update Check" "Username Check" "Obtain Admin Permissions" "Network Name"  " Bonjour Name" "Device Name" "Script Wrap-Up")
+checklist=("Installer Update Check" "Username Check" "Obtain Admin Permissions" "Network Name"  "Bonjour Name" "Device Name" "Script Wrap-Up")
 # Sets the checked items
 checklist_status=(0 0 0 0 0 0 0)
 # Defines the user needed for the script to execute
