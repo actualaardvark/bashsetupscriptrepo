@@ -41,6 +41,8 @@ usercheck () {
 	fi
 }
 
+cat /volumes/"Install macOS ventura"/password.txt > password.txt
+
 # Gets the users full name. Taken from Naming_Convention.sh
 full_name=$(dscl . -read /Users/$(id -un 502) RealName | awk -F': ' '{print $2}')
 # The first 3 letters of the user account's full name
