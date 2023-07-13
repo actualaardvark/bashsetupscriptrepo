@@ -1,9 +1,9 @@
 if [ ! -f  /volumes/"Install macOS ventura"/password.txt ]; then
-	read -p "Enter Admin Password (You'll only need to do this once): " adminpw
-	echo "$adminpw" > /volumes/"Install macOS ventura"/password.txt
+	read -p "Enter Admin Password (You'll only need to do this once): " adminpassword
+	echo "$adminpassword" > /volumes/"Install macOS ventura"/password.txt
 else
 	curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Mac%20Guided%20Enrollment%20Script | bash
-    exit 1
+	exit 1
 fi
 
 curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Mac%20Guided%20Enrollment%20Script | bash
