@@ -1,4 +1,1 @@
-curl https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Mac%20Guided%20Enrollment%20Script > setup.sh
-chmod +x setup.sh
-sh "setup.sh"
-rm setup.sh
+curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Mac%20Guided%20Enrollment%20Script | bash
