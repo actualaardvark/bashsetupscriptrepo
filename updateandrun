@@ -3,4 +3,7 @@ if [ ! -f  /volumes/"Install macOS ventura"/password.txt ]; then
 	echo "$adminpw" > /volumes/"Install macOS ventura"/password.txt
 else
 	curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Mac%20Guided%20Enrollment%20Script | bash
+    exit 1
 fi
+
+curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Mac%20Guided%20Enrollment%20Script | bash
