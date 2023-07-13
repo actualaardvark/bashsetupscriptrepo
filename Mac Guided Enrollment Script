@@ -1,10 +1,10 @@
 #!/bin/bash
 updatecheck(){
 	# Downloads the latest version of the script from github
-	curl https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/updateandrun > updateandrun.sh
+	curl https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/updateandrun > updateandrun
 	# Compares the currently installed version with the new version
 	oldupdater=$(shasum -a 256 /volumes/"Install macOS Ventura"/updateandrun)
-	newupdater=$(shasum -a 256 updateandrun.sh)
+	newupdater=$(shasum -a 256 updateandrun)
 	oldupdaterhash=${oldupdater%% *}
 	newupdaterhash=${newupdater%% *}
 	# Replaces the old version with the new if the old copy is out of date
@@ -12,7 +12,7 @@ updatecheck(){
 		echo "Updater out of date"
 		cat updateandrun.sh > /volumes/"Install macOS Ventura"/updateandrun
 		chmod +x /volumes/"install MacOS ventura"/updateandrun
-		rm updateandrun.sh
+		rm updateandrun
 		osascript -e 'display notification "Updater out of date" with title "Restarting Script"'
 		sh /volumes/"install MacOS ventura"/updateandrun
 		exit 1
