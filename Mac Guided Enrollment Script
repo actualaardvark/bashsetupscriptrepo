@@ -86,9 +86,5 @@ sudo profiles renew -type enrollment
 checklist_status=(1 1 1 1 1 1 1)
 
 checklistrender
-if [ "$userlevel" = "NLS" ]; then
-	sudo dseditgroup -o edit -d $(id -un 502) -t user admin
-fi
-if [ "$userlevel" = "NMS" ]; then
-	sudo dseditgroup -o edit -d $(id -un 502) -t user admin
-fi
+
+sudo dseditgroup -o edit -d $(id -un 502) -t user admin
