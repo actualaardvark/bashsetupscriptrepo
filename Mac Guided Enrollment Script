@@ -86,7 +86,6 @@ checklistrender
 # Renew user enrollment. Taken from user_enrollment.sh
 echo "$adminpassword" | sudo -S -k profiles renew -type enrollment
 checklist_status=(1 1 1 1 1 1 1)
-
 checklistrender
 
 echo "$userlevel"
