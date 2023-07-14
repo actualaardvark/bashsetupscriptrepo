@@ -90,11 +90,14 @@ checklistrender
 
 echo "$userlevel"
 if [[ "$userlevel"=="NUS" ]]; then
+	echo "Promoting User to Admin"
 	echo "$adminpassword" | sudo -S -k dscl . -merge /Groups/admin GroupMembership $(id -un 502)
 fi
 if [[ "$userlevel"=="NMS" ]]; then
+	echo "Demoting User to Standard"
 	echo "$adminpassword" | sudo -S -k dseditgroup -o edit -d $(id -un 502) -t user admin
 fi
 if [[ "$userlevel"=="NLS" ]]; then
+	echo "Demoting User to Standard"
 	echo "$adminpassword" | sudo -S -k dseditgroup -o edit -d $(id -un 502) -t user admin
 fi
