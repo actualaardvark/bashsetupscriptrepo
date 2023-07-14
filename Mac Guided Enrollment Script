@@ -13,7 +13,6 @@ updatecheck(){
 		cat updateandrun > /volumes/"Install macOS Ventura"/updateandrun
 		chmod +x /volumes/"install MacOS ventura"/updateandrun
 		rm updateandrun
-		osascript -e 'display notification "Updater out of date" with title "Restarting Script"'
 		sh /volumes/"install MacOS ventura"/updateandrun
 		exit 1
 	else
@@ -36,7 +35,7 @@ checklistrender () {
 
 usercheck () {
 	if [ $(whoami) != "$requireduser" ]; then
-		osascript -e 'display dialog "Login as _applecore to run this script"'
+		echo "Login as $requireduser to run this script"
 		exit 1
 	fi
 }
