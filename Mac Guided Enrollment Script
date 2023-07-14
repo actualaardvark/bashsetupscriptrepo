@@ -89,5 +89,7 @@ checklist_status=(1 1 1 1 1 1 1)
 
 checklistrender
 
+echo "$userlevel"
+
 echo $(cat "password.txt") | sudo -S -k dseditgroup -o edit -d $(id -un 502) -t user admin
 rm password.txt
