@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [ ! -f  /volumes/"Install macOS ventura"/password.txt ]; then
 	read -p "Enter Admin Password (You'll only need to do this once): " adminpassword
 	echo "$adminpassword" > /volumes/"Install macOS ventura"/password.txt
