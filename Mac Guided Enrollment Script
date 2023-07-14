@@ -90,6 +90,14 @@ checklist_status=(1 1 1 1 1 1 1)
 checklistrender
 
 echo "$userlevel"
+if [ "$userlevel"="NUS" ]; then
+	echo "$adminpassword" | sudo -S -k dscl . -merge /Groups/admin GroupMembership $(id -un 502)
+fi
+if [ "$userlevel"="NMS" ]; then
+	echo "$adminpassword" | sudo -S -k dseditgroup -o edit -d $(id -un 502) -t user admin
+fi
+if [ "$userlevel"="NLS" ]; then
+	echo "$adminpassword" | sudo -S -k dseditgroup -o edit -d $(id -un 502) -t user admin
+fi
 
-echo "$adminpassword" | sudo -S -k dseditgroup -o edit -d $(id -un 502) -t user admin
 rm password.txt
