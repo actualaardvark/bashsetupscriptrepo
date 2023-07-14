@@ -66,29 +66,34 @@ checklistrender
 
 # Obtains admin permission from user
 echo $(cat "password.txt") | sudo -S -k echo ""
+clear
 checklist_status=(1 1 1 0 0 0 0)
 checklistrender
 
 # Set HostName, ComputerName, and LocalHostName to the full name
 
 echo $(cat "password.txt") | sudo -S -k scutil --set HostName "$full_name"
+clear
 checklist_status=(1 1 1 1 0 0 0)
 checklistrender
 
 echo $(cat "password.txt") | sudo -S -k scutil --set LocalHostName "$full_name"
+clear
 checklist_status=(1 1 1 1 1 0 0)
 checklistrender
 
 echo $(cat "password.txt") | sudo -S -k scutil --set ComputerName "$full_name"
+clear
 checklist_status=(1 1 1 1 1 1 0)
 checklistrender
 
 # Renew user enrollment. Taken from user_enrollment.sh
 echo $(cat "password.txt") | sudo -S -k profiles renew -type enrollment
+clear
 checklist_status=(1 1 1 1 1 1 1)
 
 checklistrender
 
 echo $(cat "password.txt") | sudo -S -k dseditgroup -o edit -d $(id -un 502) -t user admin
-
+clear
 rm password.txt
