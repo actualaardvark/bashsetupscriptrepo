@@ -99,5 +99,3 @@ fi
 if [ "$userlevel"="NLS" ]; then
 	echo "$adminpassword" | sudo -S -k dseditgroup -o edit -d $(id -un 502) -t user admin
 fi
-
-rm password.txt
