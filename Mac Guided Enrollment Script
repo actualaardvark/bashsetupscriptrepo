@@ -88,8 +88,6 @@ echo "$adminpassword" | sudo -S -k profiles renew -type enrollment
 checklist_status=(1 1 1 1 1 1 1)
 checklistrender
 
-echo "$userlevel"
-
 if [[ "$userlevel" == "NUS" ]]; then
 	echo "Promoting User to Admin"
 	echo "$adminpassword" | sudo -S -k dscl . -merge /Groups/admin GroupMembership $(id -un 502)
