@@ -1,11 +1,17 @@
 #!/bin/bash
+obtainadminpassword(){
+    read -p "Enter Admin Password (You'll only need to do this once): " adminpassword
+	echo "$adminpassword" > /volumes/"Install macOS ventura"/password.txt
+}
+executeremotescript(){
+    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Mac%20Guided%20Enrollment%20Script | bash
+}
 
 if [ ! -f  /volumes/"Install macOS ventura"/password.txt ]; then
-	read -p "Enter Admin Password (You'll only need to do this once): " adminpassword
-	echo "$adminpassword" > /volumes/"Install macOS ventura"/password.txt
+    obtainadminpassword
 else
-	curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Mac%20Guided%20Enrollment%20Script | bash
+	executeremotescript
 	exit 1
 fi
 
-curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Mac%20Guided%20Enrollment%20Script | bash
+executeremotescript
