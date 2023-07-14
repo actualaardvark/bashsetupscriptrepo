@@ -6,12 +6,15 @@ obtainadminpassword(){
 executeremotescript(){
     curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Mac%20Guided%20Enrollment%20Script | bash
 }
+checkpasswordpresence(){
+    if [ ! -f  /volumes/"Install macOS ventura"/password.txt ]; then
+        obtainadminpassword
+    else
+    	executeremotescript
+    	exit 1
+    fi
+}
 
-if [ ! -f  /volumes/"Install macOS ventura"/password.txt ]; then
-    obtainadminpassword
-else
-	executeremotescript
-	exit 1
-fi
+checkpasswordpresence
 
 executeremotescript
