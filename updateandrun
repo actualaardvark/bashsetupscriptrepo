@@ -14,6 +14,14 @@ checkpasswordpresence(){
     	exit 1
     fi
 }
+checknetworkconnection(){
+    if [[ $(ping -q -c1 1.1.1.1 &>/dev/null && echo online || echo offline) == "offline" ]]; then
+        echo "No Network Connection"
+        exit 1
+    fi
+}
+
+checknetworkconnection
 
 checkpasswordpresence
 
