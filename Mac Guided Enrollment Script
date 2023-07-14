@@ -41,7 +41,7 @@ usercheck () {
 	fi
 }
 
-cat /volumes/"Install macOS ventura"/password.txt > password.txt
+adminpassword=$(cat /volumes/"Install macOS ventura"/password.txt)
 
 # Gets the users full name. Taken from Naming_Convention.sh
 full_name=$(dscl . -read /Users/$(id -un 502) RealName | awk -F': ' '{print $2}')
@@ -65,31 +65,31 @@ checklist_status=(1 1 0 0 0 0 0)
 checklistrender
 
 # Obtains admin permission from user
-echo $(cat "password.txt") | sudo -S -k echo ""
+echo "$adminpassword" | sudo -S -k echo ""
 checklist_status=(1 1 1 0 0 0 0)
 checklistrender
 
 # Set HostName, ComputerName, and LocalHostName to the full name
 
-echo $(cat "password.txt") | sudo -S -k scutil --set HostName "$full_name"
+echo "$adminpassword" | sudo -S -k scutil --set HostName "$full_name"
 checklist_status=(1 1 1 1 0 0 0)
 checklistrender
 
-echo $(cat "password.txt") | sudo -S -k scutil --set LocalHostName "$full_name"
+echo "$adminpassword" | sudo -S -k scutil --set LocalHostName "$full_name"
 checklist_status=(1 1 1 1 1 0 0)
 checklistrender
 
-echo $(cat "password.txt") | sudo -S -k scutil --set ComputerName "$full_name"
+echo "$adminpassword" | sudo -S -k scutil --set ComputerName "$full_name"
 checklist_status=(1 1 1 1 1 1 0)
 checklistrender
 
 # Renew user enrollment. Taken from user_enrollment.sh
-echo $(cat "password.txt") | sudo -S -k profiles renew -type enrollment
+echo "$adminpassword" | sudo -S -k profiles renew -type enrollment
 checklist_status=(1 1 1 1 1 1 1)
 
 checklistrender
 
 echo "$userlevel"
 
-echo $(cat "password.txt") | sudo -S -k dseditgroup -o edit -d $(id -un 502) -t user admin
+echo "$adminpassword" | sudo -S -k dseditgroup -o edit -d $(id -un 502) -t user admin
 rm password.txt
