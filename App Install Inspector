@@ -5,13 +5,12 @@ full_name=$(dscl . -read /Users/$(id -un 502) RealName | awk -F': ' '{print $2}'
 # The first 3 letters of the user account's full name
 userlevel=${full_name:0:3}
 
-appdirectories=("Adobe Creative Cloud" "BitdefenderVirusScanner.app" "Garageband.app" "Keynote.app" "Microsoft Excel.app" "Microsoft PowerPoint.app" "Numbers.app" "Pages.app" "iMovie.app" "Google Chrome.app")
+appdirectories=('Adobe Creative Cloud' "BitdefenderVirusScanner.app" "Garageband.app" "Keynote.app" 'Microsoft Excel.app' 'Microsoft PowerPoint.app' "Numbers.app" "Pages.app" "iMovie.app" 'Google Chrome.app')
 
-for Item in ${appdirectories[*]}; do
-    if [ -d $Item ]; then
-        echo "$Item Installed"
-    fi
+for ((i = 0; i < ${#appdirectories[@]}; i++)); do
+    if [ -d "${appdirectories[$i]}" ]; then
+        echo "${appdirectories[$i]} Installed"
     else
-        echo "$Item Not Installed"
+        echo "${appdirectories[$i]} Not Installed"
     fi
 done
