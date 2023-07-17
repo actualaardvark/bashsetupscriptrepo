@@ -77,30 +77,49 @@ checklist_status=(1 1 0 0 0 0 0)
 checklistrender
 
 # Obtains admin permission from user
-echo "$adminpassword" | sudo -S -k echo ""
+if [ $autopassword == "true" ]; then
+	echo "$adminpassword" | sudo -S -k echo ""
+else
+	sudo echo ""
+fi
 clear
 checklist_status=(1 1 1 0 0 0 0)
 checklistrender
 
 # Set HostName, ComputerName, and LocalHostName to the full name
-
-echo "$adminpassword" | sudo -S -k scutil --set HostName "$full_name"
+if [ $autopassword == "true" ]; then
+	echo "$adminpassword" | sudo -S -k scutil --set HostName "$full_name"
+else
+	sudo scutil --set HostName "$full_name"
+fi
 clear
 checklist_status=(1 1 1 1 0 0 0)
 checklistrender
 
-echo "$adminpassword" | sudo -S -k scutil --set LocalHostName "$full_name"
+if [ $autopassword == "true" ]; then
+	echo "$adminpassword" | sudo -S -k scutil --set LocalHostName "$full_name"
+else
+	sudo scutil --set LocalHostName "$full_name"
+fi
 clear
 checklist_status=(1 1 1 1 1 0 0)
 checklistrender
 
-echo "$adminpassword" | sudo -S -k scutil --set ComputerName "$full_name"
+if [ $autopassword == "true" ]; then
+	echo "$adminpassword" | sudo -S -k scutil --set ComputerName "$full_name"
+else
+	sudo scutil --set ComputerName "$full_name"
+fi
 clear
 checklist_status=(1 1 1 1 1 1 0)
 checklistrender
 
 # Renew user enrollment. Taken from user_enrollment.sh
-echo "$adminpassword" | sudo -S -k profiles renew -type enrollment
+if [ $autopassword == "true" ]; then
+	echo "$adminpassword" | sudo -S -k profiles renew -type enrollment
+else
+	sudo profiles renew -type enrollment
+fi
 clear
 checklist_status=(1 1 1 1 1 1 1)
 checklistrender
