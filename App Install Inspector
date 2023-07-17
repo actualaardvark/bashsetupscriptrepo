@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Gets the users full name. Taken from Naming_Convention.sh
+full_name=$(dscl . -read /Users/$(id -un 502) RealName | awk -F': ' '{print $2}')
+# The first 3 letters of the user account's full name
+userlevel=${full_name:0:3}
+
+appdirectories=("Adobe Creative Cloud" "BitdefenderVirusScanner.app" "Garageband.app" "Keynote.app" "Microsoft Excel.app" "Microsoft PowerPoint.app" "Numbers.app" "Pages.app" "iMovie.app" "Google Chrome.app")
+
+for Item in ${appdirectories[*]}; do
+    if [ -d $Item ]; then
+        echo "$Item Installed"
+    fi
+    else
+        echo "$Item Not Installed"
+    fi
+done
