@@ -5,17 +5,17 @@ full_name=$(dscl . -read /Users/$(id -un 502) RealName | awk -F': ' '{print $2}'
 # The first 3 letters of the user account's full name
 userlevel=${full_name:0:3}
 
-appdirectories=('Adobe Creative Cloud' "BitdefenderVirusScanner.app" "Garageband.app" "Keynote.app" 'Microsoft Excel.app' 'Microsoft PowerPoint.app' "Numbers.app" "Pages.app" "iMovie.app" 'Google Chrome.app' 'Microsoft OneNote.app')
+appdirectories=()
+while IFS= read -r line; do
+  appdirectories+=("$line")
+done < "/volumes/Install MacOS Ventura/App List.txt"
 
-installedapps=()
+declare -a installedapps=()
 
 for ((i = 0; i < ${#appdirectories[@]}; i++)); do
-    if [ -d "${appdirectories[$i]}" ]; then
-        echo "${appdirectories[$i]} Installed"
-        installedapps+=( 1 )
+    if [ -d "/Applications/${appdirectories[$i]}" ]; then
+        echo '[x] '"${appdirectories[$i]}"
     else
-        echo "${appdirectories[$i]} Not Installed"
-        installedapps+=( 0 )
+        echo '[ ] '"${appdirectories[$i]}"
     fi
 done
-echo "$installedapps"
