@@ -19,7 +19,6 @@ updatecheck(){
 		echo "Updater is on the latest version"
 	fi
 }
-
 checklistrender () {
 	# Loop through checklist items and display them with checkboxes
     clear
@@ -32,14 +31,12 @@ checklistrender () {
         echo "$checkbox ${checklist[$i]}"
     done
 }
-
 usercheck () {
 	if [ $(whoami) != "$requireduser" ]; then
 		echo "Login as $requireduser to run this script"
 		exit 1
 	fi
 }
-
 userlevelcheck(){
 	if [[ "$userlevel" == "NUS" ]]; then
 		echo "Promoting User to Admin"

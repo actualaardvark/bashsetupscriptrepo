@@ -21,6 +21,8 @@ checknetworkconnection(){
     fi
 }
 
+adminpassword=$(cat /volumes/"Install macOS ventura"/password.txt)
+
 checknetworkconnection
 
 checkpasswordpresence
