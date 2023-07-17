@@ -16,8 +16,8 @@ declare -a installedapps=()
 
 for ((i = 0; i < ${#appdirectories[@]}; i++)); do
     firstletter=${appdirectories[$i]:0:1}
-    if [[ $firstletter != '#' ]] ; then
-        if [ -d "/Applications/${appdirectories[$i]}" ]; then
+    if [[ $firstletter != '#' ]]; then
+        if [ -d "/Applications/${appdirectories[$i]}" ] || [ -d "/Applications/${appdirectories[$i]}.app" ]; then
             echo '[x] '"${appdirectories[$i]}"
         else
             echo '[ ] '"${appdirectories[$i]}"
