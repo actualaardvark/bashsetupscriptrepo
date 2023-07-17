@@ -1,6 +1,6 @@
 #!/bin/bash
 
-curl -s "https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Additional%20Scripts/App%20List.txt" > /volumes/"Install macOS Ventura"/"Additional Scripts"/"App List.txt"
+#curl -s "https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Additional%20Scripts/App%20List.txt" > /volumes/"Install macOS Ventura"/"Additional Scripts"/"App List.txt"
 
 # Gets the users full name. Taken from Naming_Convention.sh
 full_name=$(dscl . -read /Users/$(id -un 502) RealName | awk -F': ' '{print $2}')
@@ -9,15 +9,18 @@ userlevel=${full_name:0:3}
 
 appdirectories=()
 while IFS= read -r line; do
-  appdirectories+=("$line")
-done < "/volumes/Install MacOS Ventura/Additional Scripts/App List.txt"
+    appdirectories+=("$line")
+done < "/Users/tatrose/bashsetupscriptrepo/apps.conf"
 
 declare -a installedapps=()
 
 for ((i = 0; i < ${#appdirectories[@]}; i++)); do
-    if [ -d "/Applications/${appdirectories[$i]}" ]; then
-        echo '[x] '"${appdirectories[$i]}"
-    else
-        echo '[ ] '"${appdirectories[$i]}"
+    firstletter=${appdirectories[$i]:0:1}
+    if [[ $firstletter != '#' ]] ; then
+        if [ -d "/Applications/${appdirectories[$i]}" ]; then
+            echo '[x] '"${appdirectories[$i]}"
+        else
+            echo '[ ] '"${appdirectories[$i]}"
+        fi
     fi
 done
