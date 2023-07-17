@@ -11,13 +11,32 @@ done < "/Users/tatrose/bashsetupscriptrepo/apps.conf"
 
 declare -a installedapps=()
 
+if [ $checklistii == "true" ]; then
+    for ((i = 0; i < ${#appdirectories[@]}; i++)); do
+        firstletter=${appdirectories[$i]:0:1}
+        if [[ $firstletter != '#' ]]; then
+            if [ -d "/Applications/${appdirectories[$i]}" ] || [ -d "/Applications/${appdirectories[$i]}.app" ]; then
+                echo '[x] '"${appdirectories[$i]}"
+            else
+                echo '[ ] '"${appdirectories[$i]}"
+            fi
+        fi
+    done
+fi
+
+totalapps=0
+readyapps=0
+
 for ((i = 0; i < ${#appdirectories[@]}; i++)); do
     firstletter=${appdirectories[$i]:0:1}
     if [[ $firstletter != '#' ]]; then
         if [ -d "/Applications/${appdirectories[$i]}" ] || [ -d "/Applications/${appdirectories[$i]}.app" ]; then
-            echo '[x] '"${appdirectories[$i]}"
+            readyapps=$(($readyapps + 1))
+            totalapps=$(($totalapps + 1))
         else
-            echo '[ ] '"${appdirectories[$i]}"
+            totalapps=$(($totalapps + 1))
         fi
     fi
 done
+
+echo "$readyapps"'/'"$totalapps"" Apps Installed"
