@@ -10,7 +10,7 @@ userlevel=${full_name:0:3}
 appdirectories=()
 while IFS= read -r line; do
   appdirectories+=("$line")
-done < "/volumes/Install MacOS Ventura/App List.txt"
+done < "/volumes/Install MacOS Ventura/Additional Scripts/App List.txt"
 
 declare -a installedapps=()
 
