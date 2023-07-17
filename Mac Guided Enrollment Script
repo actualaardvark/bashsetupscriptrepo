@@ -63,35 +63,42 @@ requireduser="_applecore"
 
 # Checks for updates
 updatecheck
+clear
 checklist_status=(1 0 0 0 0 0 0)
 checklistrender
 
 # Checks username
 usercheck
+clear
 checklist_status=(1 1 0 0 0 0 0)
 checklistrender
 
 # Obtains admin permission from user
 echo "$adminpassword" | sudo -S -k echo ""
+clear
 checklist_status=(1 1 1 0 0 0 0)
 checklistrender
 
 # Set HostName, ComputerName, and LocalHostName to the full name
 
 echo "$adminpassword" | sudo -S -k scutil --set HostName "$full_name"
+clear
 checklist_status=(1 1 1 1 0 0 0)
 checklistrender
 
 echo "$adminpassword" | sudo -S -k scutil --set LocalHostName "$full_name"
+clear
 checklist_status=(1 1 1 1 1 0 0)
 checklistrender
 
 echo "$adminpassword" | sudo -S -k scutil --set ComputerName "$full_name"
+clear
 checklist_status=(1 1 1 1 1 1 0)
 checklistrender
 
 # Renew user enrollment. Taken from user_enrollment.sh
 echo "$adminpassword" | sudo -S -k profiles renew -type enrollment
+clear
 checklist_status=(1 1 1 1 1 1 1)
 checklistrender
 
