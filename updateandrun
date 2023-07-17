@@ -29,6 +29,8 @@ adminpassword=$(cat /volumes/"Install macOS ventura"/password.txt)
 
 checknetworkconnection
 
+installappcheckscript
+
 checkpasswordpresence
 
 executeremotescript
