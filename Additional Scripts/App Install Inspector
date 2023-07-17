@@ -1,11 +1,8 @@
 #!/bin/bash
 
-#curl -s "https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Additional%20Scripts/App%20List.txt" > /volumes/"Install macOS Ventura"/"Additional Scripts"/"App List.txt"
+source values.conf
 
-# Gets the users full name. Taken from Naming_Convention.sh
-full_name=$(dscl . -read /Users/$(id -un 502) RealName | awk -F': ' '{print $2}')
-# The first 3 letters of the user account's full name
-userlevel=${full_name:0:3}
+#curl -s "https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Additional%20Scripts/App%20List.txt" > /volumes/"Install macOS Ventura"/"Additional Scripts"/"App List.txt"
 
 appdirectories=()
 while IFS= read -r line; do

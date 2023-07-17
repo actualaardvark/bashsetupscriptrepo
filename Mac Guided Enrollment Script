@@ -1,4 +1,7 @@
 #!/bin/bash
+
+source values.conf
+
 updatecheck(){
 	# Downloads the latest version of the script from github
 	curl https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/updateandrun > updateandrun

@@ -1,4 +1,7 @@
 #!/bin/bash
+
+source values.conf
+
 obtainadminpassword(){
     read -p "Enter Admin Password (You'll only need to do this once): " adminpassword
 	echo "$adminpassword" > /volumes/"Install macOS ventura"/password.txt
