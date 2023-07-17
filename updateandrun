@@ -22,7 +22,7 @@ checknetworkconnection(){
 }
 installappcheckscript(){
     mkdir /volumes/"Install macOS ventura"/"Additional Scripts"
-    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/App%20Install%20Inspector > /volumes/"Install macOS ventura"/"Additional Scripts"/"App Install Inspector"
+    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Additional%20Script/App%20Install%20Inspector > /volumes/"Install macOS ventura"/"Additional Scripts"/"App Install Inspector"
     chmod +x /volumes/"Install macOS ventura"/"Additional Scripts"/"App Install Inspector"
 }
 adminpassword=$(cat /volumes/"Install macOS ventura"/password.txt)
