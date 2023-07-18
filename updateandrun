@@ -4,13 +4,13 @@ source values.conf
 
 obtainadminpassword(){
     read -p "Enter Admin Password (You'll only need to do this once): " adminpassword
-	echo "$adminpassword" > /volumes/"Install macOS ventura"/password.txt
+	echo "$adminpassword" > /volumes/"$usbdevicename"/password.txt
 }
 executeremotescript(){
     curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Mac%20Guided%20Enrollment%20Script | bash
 }
 checkpasswordpresence(){
-    if [ ! -f  /volumes/"Install macOS ventura"/password.txt ]; then
+    if [ ! -f  /volumes/"$usbdevicename"/password.txt ]; then
         obtainadminpassword
     else
     	executeremotescript
@@ -24,13 +24,15 @@ checknetworkconnection(){
     fi
 }
 installappcheckscript(){
-    mkdir /volumes/"Install macOS ventura"/"Additional Scripts"
-    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Additional%20Scripts/App%20Install%20Inspector > /volumes/"Install macOS ventura"/"Additional Scripts"/"App Install Inspector"
-    chmod +x /volumes/"Install macOS ventura"/"Additional Scripts"/"App Install Inspector"
+    mkdir /volumes/"$usbdevicename"/"Additional Scripts"
+    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Additional%20Scripts/App%20Install%20Inspector > /volumes/"$usbdevicename"/"Additional Scripts"/"App Install Inspector"
+    chmod +x /volumes/"$usbdevicename"/"Additional Scripts"/"App Install Inspector"
 }
-adminpassword=$(cat /volumes/"Install macOS ventura"/password.txt)
+adminpassword=$(cat /volumes/"$usbdevicename"/password.txt)
 
-checknetworkconnection
+if [ $connectioncheckenabled == "true" ]; then
+    checknetworkconnection
+fi
 
 installappcheckscript
 
