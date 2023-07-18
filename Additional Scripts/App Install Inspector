@@ -1,13 +1,15 @@
 #!/bin/bash
 
-source /volumes/"Install macOS Ventura"/values.conf
+cd "$(dirname "${BASH_SOURCE[0]}")"
 
-curl -s "https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Additional%20Scripts/apps.conf" > /volumes/"$usbdevicename"/"Additional Scripts"/"apps.conf"
+source values.conf
+
+curl -s "https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Additional%20Scripts/apps.conf" > "Additional Scripts"/"apps.conf"
 
 appdirectories=()
 while IFS= read -r line; do
     appdirectories+=("$line")
-done < "/volumes/"$usbdevicename"/password.txt"
+done < "Additional Scripts/apps.conf"
 
 declare -a installedapps=()
 
