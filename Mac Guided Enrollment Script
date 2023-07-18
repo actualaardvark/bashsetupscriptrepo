@@ -1,22 +1,24 @@
 #!/bin/bash
 
-source /volumes/"Install macOS Ventura"/values.conf
+cd "$(dirname "${BASH_SOURCE[0]}")"
+
+source values.conf
 
 updatecheck(){
 	if [ $updatecheck == "true" ]; then
 		# Downloads the latest version of the script from github
-		curl https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/updateandrun > updateandrun
+		curl https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/updateandrun > updateandruntmp
 		# Compares the currently installed version with the new version
 		oldupdater=$(shasum -a 256 /volumes/"$usbdevicename"/updateandrun)
-		newupdater=$(shasum -a 256 updateandrun)
+		newupdater=$(shasum -a 256 updateandruntmp)
 		oldupdaterhash=${oldupdater%% *}
 		newupdaterhash=${newupdater%% *}
 		# Replaces the old version with the new if the old copy is out of date
 		if [ "$oldupdaterhash" != "$newupdaterhash" ]; then
 			echo "Updater out of date"
-			cat updateandrun > /volumes/"$usbdevicename"/updateandrun
+			cat updateandruntmp > /volumes/"$usbdevicename"/updateandrun
 			chmod +x /volumes/"$usbdevicename"/updateandrun
-			rm updateandrun
+			rm updateandruntmp
 			sh /volumes/"$usbdevicename"/updateandrun
 			exit 1
 		else
