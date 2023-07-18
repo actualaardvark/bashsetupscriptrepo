@@ -53,8 +53,6 @@ userlevelcheck(){
 	fi
 }
 
-adminpassword=$(cat /volumes/"$usbdevicename"/password.txt)
-
 # Define checklist items
 checklist=("Installer Update Check" "Username Check" "Obtain Admin Permissions" "Network Name"  "Bonjour Name" "Device Name" "Script Wrap-Up")
 # Sets the checked items
