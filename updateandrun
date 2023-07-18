@@ -30,11 +30,10 @@ checknetworkconnection(){
     fi
 }
 installappcheckscript(){
-    mkdir /volumes/"$usbdevicename"/"Additional Scripts"
+    mkdir "Additional Scripts"
     curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Additional%20Scripts/App%20Install%20Inspector > /volumes/"$usbdevicename"/"Additional Scripts"/"App Install Inspector"
-    chmod +x /volumes/"$usbdevicename"/"Additional Scripts"/"App Install Inspector"
+    chmod +x "Additional Scripts"/"App Install Inspector"
 }
-adminpassword=$(cat /volumes/"$usbdevicename"/password.txt)
 
 if [ $connectioncheckenabled == "true" ]; then
     checknetworkconnection
