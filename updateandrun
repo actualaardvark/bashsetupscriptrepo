@@ -9,7 +9,7 @@ obtainadminpassword(){
     fi
 }
 executeremotescript(){
-    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Mac%20Guided%20Enrollment%20Script > /volumes/"$usbdevicename"/"Mac Guided Enrollment Script"
+    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Mac%20Guided%20Enrollment%20Script > /volumes/"$usbdevicename"/"Mac Guided Enrollment Script"
     chmod +x /volumes/"$usbdevicename"/"Mac Guided Enrollment Script"
     sh /volumes/"$usbdevicename"/"Mac Guided Enrollment Script"
 }
@@ -29,7 +29,7 @@ checknetworkconnection(){
 }
 installappcheckscript(){
     mkdir /volumes/"$usbdevicename"/"Additional Scripts"
-    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Additional%20Scripts/App%20Install%20Inspector > /volumes/"$usbdevicename"/"Additional Scripts"/"App Install Inspector"
+    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Additional%20Scripts/App%20Install%20Inspector > /volumes/"$usbdevicename"/"Additional Scripts"/"App Install Inspector"
     chmod +x /volumes/"$usbdevicename"/"Additional Scripts"/"App Install Inspector"
 }
 adminpassword=$(cat /volumes/"$usbdevicename"/password.txt)

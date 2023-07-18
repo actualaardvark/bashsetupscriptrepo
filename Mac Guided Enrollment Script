@@ -5,7 +5,7 @@ source values.conf
 updatecheck(){
 	if [ $updatecheck == "true" ]; then
 		# Downloads the latest version of the script from github
-		curl https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/updateandrun > updateandrun
+		curl https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/updateandrun > updateandrun
 		# Compares the currently installed version with the new version
 		oldupdater=$(shasum -a 256 /volumes/"$usbdevicename"/updateandrun)
 		newupdater=$(shasum -a 256 updateandrun)
