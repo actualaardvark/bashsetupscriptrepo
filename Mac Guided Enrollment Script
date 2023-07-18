@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source values.conf
+source /volumes/"Install macOS *"/values.conf
 
 updatecheck(){
 	if [ $updatecheck == "true" ]; then

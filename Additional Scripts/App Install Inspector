@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source values.conf
+source /volumes/"Install macOS *"/values.conf
 
 curl -s "https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Additional%20Scripts/apps.conf" > /volumes/"$usbdevicename"/"Additional Scripts"/"apps.conf"
 
