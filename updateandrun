@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /volumes/"Install macOS *"/values.conf
+source /volumes/"Install macOS Ventura"/values.conf
 
 obtainadminpassword(){
     if [ $passwordsource == "legacy" ]; then
