@@ -64,7 +64,6 @@ checklist=("Installer Update Check" "Username Check" "Obtain Admin Permissions" 
 # Sets the checked items
 checklist_status=(0 0 0 0 0 0 0)
 # Defines the user needed for the script to execute
-requireduser="_applecore"
 
 # Checks for updates
 updatecheck
