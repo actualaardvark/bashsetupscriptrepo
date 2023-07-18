@@ -7,7 +7,9 @@ obtainadminpassword(){
 	echo "$adminpassword" > /volumes/"$usbdevicename"/password.txt
 }
 executeremotescript(){
-    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Mac%20Guided%20Enrollment%20Script | bash
+    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Mac%20Guided%20Enrollment%20Script > /volumes/"$usbdevicename"/"Mac Guided Enrollment Script"
+    chmod +x /volumes/"$usbdevicename"/"Mac Guided Enrollment Script"
+    sh /volumes/"$usbdevicename"/"Mac Guided Enrollment Script"
 }
 checkpasswordpresence(){
     if [ ! -f  /volumes/"$usbdevicename"/password.txt ]; then
