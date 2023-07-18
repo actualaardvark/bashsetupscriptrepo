@@ -6,17 +6,17 @@ updatecheck(){
 	# Downloads the latest version of the script from github
 	curl https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/updateandrun > updateandrun
 	# Compares the currently installed version with the new version
-	oldupdater=$(shasum -a 256 /volumes/"Install macOS Ventura"/updateandrun)
+	oldupdater=$(shasum -a 256 /volumes/"$usbdevicename"/updateandrun)
 	newupdater=$(shasum -a 256 updateandrun)
 	oldupdaterhash=${oldupdater%% *}
 	newupdaterhash=${newupdater%% *}
 	# Replaces the old version with the new if the old copy is out of date
 	if [ "$oldupdaterhash" != "$newupdaterhash" ]; then
 		echo "Updater out of date"
-		cat updateandrun > /volumes/"Install macOS Ventura"/updateandrun
-		chmod +x /volumes/"install MacOS ventura"/updateandrun
+		cat updateandrun > /volumes/"$usbdevicename"/updateandrun
+		chmod +x /volumes/"$usbdevicename"/updateandrun
 		rm updateandrun
-		sh /volumes/"install MacOS ventura"/updateandrun
+		sh /volumes/"$usbdevicename"/updateandrun
 		exit 1
 	else
 		echo "Updater is on the latest version"
@@ -51,7 +51,7 @@ userlevelcheck(){
 	fi
 }
 
-adminpassword=$(cat /volumes/"Install macOS ventura"/password.txt)
+adminpassword=$(cat /volumes/"$usbdevicename"/password.txt)
 
 # Gets the users full name. Taken from Naming_Convention.sh
 full_name=$(dscl . -read /Users/$(id -un 502) RealName | awk -F': ' '{print $2}')
