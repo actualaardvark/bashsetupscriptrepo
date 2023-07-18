@@ -2,22 +2,41 @@
 
 curl -s "https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Additional%20Scripts/App%20List.txt" > /volumes/"Install macOS Ventura"/"Additional Scripts"/"App List.txt"
 
-# Gets the users full name. Taken from Naming_Convention.sh
-full_name=$(dscl . -read /Users/$(id -un 502) RealName | awk -F': ' '{print $2}')
-# The first 3 letters of the user account's full name
-userlevel=${full_name:0:3}
-
 appdirectories=()
 while IFS= read -r line; do
-  appdirectories+=("$line")
-done < "/volumes/Install MacOS Ventura/Additional Scripts/App List.txt"
+    appdirectories+=("$line")
+done < /volumes/"Install macOS Ventura"/"Additional Scripts"/"App List.txt"
 
 declare -a installedapps=()
 
+checklistii=true
+
+if [ $checklistii == "true" ]; then
+    for ((i = 0; i < ${#appdirectories[@]}; i++)); do
+        firstletter=${appdirectories[$i]:0:1}
+        if [[ $firstletter != '#' ]]; then
+            if [ -d "/Applications/${appdirectories[$i]}" ] || [ -d "/Applications/${appdirectories[$i]}.app" ]; then
+                echo '[x] '"${appdirectories[$i]}"
+            else
+                echo '[ ] '"${appdirectories[$i]}"
+            fi
+        fi
+    done
+fi
+
+totalapps=0
+readyapps=0
+
 for ((i = 0; i < ${#appdirectories[@]}; i++)); do
-    if [ -d "/Applications/${appdirectories[$i]}" ]; then
-        echo '[x] '"${appdirectories[$i]}"
-    else
-        echo '[ ] '"${appdirectories[$i]}"
+    firstletter=${appdirectories[$i]:0:1}
+    if [[ $firstletter != '#' ]]; then
+        if [ -d "/Applications/${appdirectories[$i]}" ] || [ -d "/Applications/${appdirectories[$i]}.app" ]; then
+            readyapps=$(($readyapps + 1))
+            totalapps=$(($totalapps + 1))
+        else
+            totalapps=$(($totalapps + 1))
+        fi
     fi
 done
+
+echo "$readyapps"'/'"$totalapps"" Apps Installed"
