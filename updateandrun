@@ -31,7 +31,7 @@ checknetworkconnection(){
 }
 installappcheckscript(){
     mkdir "Additional Scripts"
-    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Additional%20Scripts/App%20Install%20Inspector > /volumes/"$usbdevicename"/"Additional Scripts"/"App Install Inspector"
+    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Additional%20Scripts/App%20Install%20Inspector > "Additional Scripts"/"App Install Inspector"
     chmod +x "Additional Scripts"/"App Install Inspector"
 }
 
