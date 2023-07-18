@@ -16,7 +16,7 @@ executeremotescript(){
     sh "Mac Guided Enrollment Script"
 }
 checkpasswordpresence(){
-    if [ ! -f  /volumes/"$usbdevicename"/password.txt ]; then
+    if [ ! -f  password.txt ]; then
         obtainadminpassword
     else
     	executeremotescript
