@@ -7,13 +7,13 @@ source values.conf
 obtainadminpassword(){
     if [ $passwordsource == "legacy" ]; then
         read -p "Enter Admin Password (You'll only need to do this once): " adminpassword
-	    echo "$adminpassword" > /volumes/"$usbdevicename"/password.txt
+	    echo "$adminpassword" > password.txt
     fi
 }
 executeremotescript(){
-    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Mac%20Guided%20Enrollment%20Script > /volumes/"$usbdevicename"/"Mac Guided Enrollment Script"
-    chmod +x /volumes/"$usbdevicename"/"Mac Guided Enrollment Script"
-    sh /volumes/"$usbdevicename"/"Mac Guided Enrollment Script"
+    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Mac%20Guided%20Enrollment%20Script > "Mac Guided Enrollment Script"
+    chmod +x "Mac Guided Enrollment Script"
+    sh "Mac Guided Enrollment Script"
 }
 checkpasswordpresence(){
     if [ ! -f  /volumes/"$usbdevicename"/password.txt ]; then
