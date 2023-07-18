@@ -39,9 +39,11 @@ checklistrender () {
 	fi
 }
 usercheck () {
-	if [ $(whoami) != "$requireduser" ]; then
-		echo "Login as $requireduser to run this script"
-		exit 1
+	if [ $usernamecheck == "true" ]; then
+		if [ $(whoami) != "$requireduser" ]; then
+			echo "Login as $requireduser to run this script"
+			exit 1
+		fi
 	fi
 }
 userlevelcheck(){
