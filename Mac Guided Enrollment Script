@@ -6,19 +6,11 @@ source values.conf
 
 updatecheck(){
 	if [ $updatecheck == "true" ]; then
-		# Downloads the latest version of the script from github
-		curl https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/updateandrun > updateandruntmp
-		# Compares the currently installed version with the new version
-		oldupdater=$(shasum -a 256 updateandrun)
-		newupdater=$(shasum -a 256 updateandruntmp)
-		oldupdaterhash=${oldupdater%% *}
-		newupdaterhash=${newupdater%% *}
 		# Replaces the old version with the new if the old copy is out of date
-		if [ "$oldupdaterhash" != "$newupdaterhash" ]; then
+		if [ "$(curl https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/updateandrun)" != "$(cat updateandrun)" ]; then
 			echo "Updater out of date"
-			cat updateandruntmp > updateandrun
+			curl https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/updateandrun > updateandrun
 			chmod +x updateandrun
-			rm updateandruntmp
 			sh updateandrun
 			exit 1
 		else
@@ -26,6 +18,7 @@ updatecheck(){
 		fi
 	fi
 }
+
 checklistrender () {
 	if [ $checklistge == "true" ]; then
 		# Loop through checklist items and display them with checkboxes
@@ -40,6 +33,7 @@ checklistrender () {
     	done
 	fi
 }
+
 usercheck () {
 	if [ $usernamecheck == "true" ]; then
 		if [ $(whoami) != "$requireduser" ]; then
@@ -48,6 +42,7 @@ usercheck () {
 		fi
 	fi
 }
+
 userlevelcheck(){
 	if [[ "$userlevel" == "NUS" ]]; then
 		echo "Promoting User to Admin"
