@@ -20,7 +20,7 @@ updateconfigfile(){
 obtainadminpassword(){
     if [ $passwordsource == "legacy" ]; then
         read -p "Enter Admin Password (You'll only need to do this once): " adminpassword
-	    echo "$adminpassword" > password.txt
+	    echo "$adminpassword" > password.conf
     fi
 }
 
@@ -31,7 +31,7 @@ executeremotescript(){
 }
 
 checkpasswordpresence(){
-    if [ ! -f  password.txt ]; then
+    if [ ! -f  password.conf ]; then
         obtainadminpassword
     else
     	executeremotescript
