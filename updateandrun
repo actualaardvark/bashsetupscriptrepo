@@ -2,6 +2,14 @@
 
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
+# Temporary, remove with future update
+if [ ! -f  values.conf ]; then
+    echo "Configuration file out of date"
+    curl -s 'https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/values.conf' > values.conf
+    sh updateandrun
+    exit 1
+fi
+
 source values.conf
 
 updateconfigfile(){
