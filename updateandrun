@@ -4,6 +4,17 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 
 source values.conf
 
+updateconfigfile(){
+    if [ "$(curl $configupdateurl)" != "$(cat values.conf)" ]; then
+		echo "Configuration file out of date"
+		curl "$configupdateurl" > values.conf
+		sh updateandrun
+		exit 1
+	else
+		echo "Configuration file out of date"
+	fi
+}
+
 obtainadminpassword(){
     if [ $passwordsource == "legacy" ]; then
         read -p "Enter Admin Password (You'll only need to do this once): " adminpassword
@@ -42,6 +53,8 @@ installappcheckscript(){
 if [ $connectioncheckenabled == "true" ]; then
     checknetworkconnection
 fi
+
+updateconfigfile
 
 installappcheckscript
 
