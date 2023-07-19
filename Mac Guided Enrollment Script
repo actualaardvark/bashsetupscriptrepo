@@ -1,65 +1,64 @@
 #!/bin/bash
+
+cd "$(dirname "${BASH_SOURCE[0]}")"
+
+source values.conf
+
 updatecheck(){
-	# Downloads the latest version of the script from github
-	curl https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/updateandrun > updateandrun
-	# Compares the currently installed version with the new version
-	oldupdater=$(shasum -a 256 /volumes/"Install macOS Ventura"/updateandrun)
-	newupdater=$(shasum -a 256 updateandrun)
-	oldupdaterhash=${oldupdater%% *}
-	newupdaterhash=${newupdater%% *}
-	# Replaces the old version with the new if the old copy is out of date
-	if [ "$oldupdaterhash" != "$newupdaterhash" ]; then
-		echo "Updater out of date"
-		cat updateandrun > /volumes/"Install macOS Ventura"/updateandrun
-		chmod +x /volumes/"install MacOS ventura"/updateandrun
-		rm updateandrun
-		sh /volumes/"install MacOS ventura"/updateandrun
-		exit 1
-	else
-		echo "Updater is on the latest version"
+	if [ $updatecheck == "true" ]; then
+		# Replaces the old version with the new if the old copy is out of date
+		if [ "$(curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/updateandrun)" != "$(cat updateandrun)" ]; then
+			echo "Updater out of date"
+			curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/updateandrun > updateandrun
+			chmod +x updateandrun
+			sh updateandrun
+			exit 1
+		else
+			echo "Updater is on the latest version"
+		fi
 	fi
 }
+
 checklistrender () {
-	# Loop through checklist items and display them with checkboxes
-    clear
-    for ((i=0; i<${#checklist[@]}; i++)); do
-        if [[ ${checklist_status[$i]} -eq 1 ]]; then
-            checkbox="[x]"
-        else
-            checkbox="[ ]"
-        fi
-        echo "$checkbox ${checklist[$i]}"
-    done
-}
-usercheck () {
-	if [ $(whoami) != "$requireduser" ]; then
-		echo "Login as $requireduser to run this script"
-		exit 1
+	if [ $checklistge == "true" ]; then
+		# Loop through checklist items and display them with checkboxes
+    	clear
+    	for ((i=0; i<${#checklist[@]}; i++)); do
+    	    if [[ ${checklist_status[$i]} -eq 1 ]]; then
+    	        checkbox="[x]"
+    	    else
+    	        checkbox="[ ]"
+    	    fi
+    	    echo "$checkbox ${checklist[$i]}"
+    	done
 	fi
 }
+
+usercheck () {
+	if [ $usernamecheck == "true" ]; then
+		if [ $(whoami) != "$requireduser" ]; then
+			echo "Login as $requireduser to run this script"
+			exit 1
+		fi
+	fi
+}
+
 userlevelcheck(){
 	if [[ "$userlevel" == "NUS" ]]; then
 		echo "Promoting User to Admin"
-		echo "$adminpassword" | sudo -S -k dscl . -merge /Groups/admin GroupMembership $(id -un 502)
+		echo "$adminpassword" | sudo -S -k dscl . -merge /Groups/admin GroupMembership $usernamebyid
 	fi
 	if [[ "$userlevel" == "NMS" || "$userlevel" == "NLS" ]]; then
 		echo "Demoting User to Standard"
-		echo "$adminpassword" | sudo -S -k dseditgroup -o edit -d $(id -un 502) -t user admin
+		echo "$adminpassword" | sudo -S -k dseditgroup -o edit -d $usernamebyid -t user admin
 	fi
 }
 
-adminpassword=$(cat /volumes/"Install macOS ventura"/password.txt)
-
-# Gets the users full name. Taken from Naming_Convention.sh
-full_name=$(dscl . -read /Users/$(id -un 502) RealName | awk -F': ' '{print $2}')
-# The first 3 letters of the user account's full name
-userlevel=${full_name:0:3}
 # Define checklist items
 checklist=("Installer Update Check" "Username Check" "Obtain Admin Permissions" "Network Name"  "Bonjour Name" "Device Name" "Script Wrap-Up")
 # Sets the checked items
 checklist_status=(0 0 0 0 0 0 0)
 # Defines the user needed for the script to execute
-requireduser="_applecore"
 
 # Checks for updates
 updatecheck
@@ -74,30 +73,49 @@ checklist_status=(1 1 0 0 0 0 0)
 checklistrender
 
 # Obtains admin permission from user
-echo "$adminpassword" | sudo -S -k echo ""
+if [ $autopassword == "true" ]; then
+	echo "$adminpassword" | sudo -S -k echo ""
+else
+	sudo echo ""
+fi
 clear
 checklist_status=(1 1 1 0 0 0 0)
 checklistrender
 
 # Set HostName, ComputerName, and LocalHostName to the full name
-
-echo "$adminpassword" | sudo -S -k scutil --set HostName "$full_name"
+if [ $autopassword == "true" ]; then
+	echo "$adminpassword" | sudo -S -k scutil --set HostName "$full_name"
+else
+	sudo scutil --set HostName "$full_name"
+fi
 clear
 checklist_status=(1 1 1 1 0 0 0)
 checklistrender
 
-echo "$adminpassword" | sudo -S -k scutil --set LocalHostName "$full_name"
+if [ $autopassword == "true" ]; then
+	echo "$adminpassword" | sudo -S -k scutil --set LocalHostName "$full_name"
+else
+	sudo scutil --set LocalHostName "$full_name"
+fi
 clear
 checklist_status=(1 1 1 1 1 0 0)
 checklistrender
 
-echo "$adminpassword" | sudo -S -k scutil --set ComputerName "$full_name"
+if [ $autopassword == "true" ]; then
+	echo "$adminpassword" | sudo -S -k scutil --set ComputerName "$full_name"
+else
+	sudo scutil --set ComputerName "$full_name"
+fi
 clear
 checklist_status=(1 1 1 1 1 1 0)
 checklistrender
 
 # Renew user enrollment. Taken from user_enrollment.sh
-echo "$adminpassword" | sudo -S -k profiles renew -type enrollment
+if [ $autopassword == "true" ]; then
+	echo "$adminpassword" | sudo -S -k profiles renew -type enrollment
+else
+	sudo profiles renew -type enrollment
+fi
 clear
 checklist_status=(1 1 1 1 1 1 1)
 checklistrender

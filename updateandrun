@@ -1,34 +1,59 @@
 #!/bin/bash
-curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/values.conf > /volumes/"Install macOS Ventura"/values.conf
-obtainadminpassword(){
-    read -p "Enter Admin Password (You'll only need to do this once): " adminpassword
-	echo "$adminpassword" > /volumes/"Install macOS ventura"/password.txt
-}
-executeremotescript(){
-    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Mac%20Guided%20Enrollment%20Script | bash
-}
-checkpasswordpresence(){
-    if [ ! -f  /volumes/"Install macOS ventura"/password.txt ]; then
-        obtainadminpassword
-    else
-    	executeremotescript
-    	exit 1
+
+cd "$(dirname "${BASH_SOURCE[0]}")"
+
+# Temporary, remove with future update
+if [ ! -f  values.conf ]; then
+    echo "Configuration file out of date"
+    curl -s 'https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/configurable-beta/values.conf' > values.conf
+    sh updateandrun
+    exit 1
+fi
+
+source values.conf
+
+updateconfigfile(){
+    if [ $configautoupdate == "true" ]; then
+        if [ "$(curl -s $configupdateurl)" != "$(cat values.conf)" ]; then
+	    	echo "Configuration file out of date"
+	    	curl -s "$configupdateurl" > values.conf
+	    	sh updateandrun
+	    	exit 1
+	    else
+	    	echo "Configuration file out of date"
+	    fi
     fi
 }
+
+executeremotescript(){
+    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Mac%20Guided%20Enrollment%20Script > "Mac Guided Enrollment Script"
+    chmod +x "Mac Guided Enrollment Script"
+    sh "Mac Guided Enrollment Script"
+}
+
+checkpasswordpresence(){
+    executeremotescript
+    exit 1
+}
+
 checknetworkconnection(){
-    if [[ $(ping -q -c1 1.1.1.1 &>/dev/null && echo online || echo offline) == "offline" ]]; then
+    if [[ $(ping -q -c1 $connectioncheckurl &>/dev/null && echo online || echo offline) == "offline" ]]; then
         echo "No Network Connection"
         exit 1
     fi
 }
-installappcheckscript(){
-    mkdir /volumes/"Install macOS ventura"/"Additional Scripts"
-    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Additional%20Scripts/App%20Install%20Inspector > /volumes/"Install macOS ventura"/"Additional Scripts"/"App Install Inspector"
-    chmod +x /volumes/"Install macOS ventura"/"Additional Scripts"/"App Install Inspector"
-}
-adminpassword=$(cat /volumes/"Install macOS ventura"/password.txt)
 
-checknetworkconnection
+installappcheckscript(){
+    mkdir "Additional Scripts"
+    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Additional%20Scripts/App%20Install%20Inspector > "Additional Scripts"/"App Install Inspector"
+    chmod +x "Additional Scripts"/"App Install Inspector"
+}
+
+if [ $connectioncheckenabled == "true" ]; then
+    checknetworkconnection
+fi
+
+updateconfigfile
 
 installappcheckscript
 

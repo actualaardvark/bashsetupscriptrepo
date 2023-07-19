@@ -1,15 +1,17 @@
 #!/bin/bash
 
-curl -s "https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Additional%20Scripts/App%20List.txt" > /volumes/"Install macOS Ventura"/"Additional Scripts"/"App List.txt"
+cd "$(dirname "${BASH_SOURCE[0]}")"
+
+source values.conf
+
+curl -s "https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Additional%20Scripts/apps.conf" > "Additional Scripts"/"apps.conf"
 
 appdirectories=()
 while IFS= read -r line; do
     appdirectories+=("$line")
-done < /volumes/"Install macOS Ventura"/"Additional Scripts"/"App List.txt"
+done < "Additional Scripts/apps.conf"
 
 declare -a installedapps=()
-
-checklistii=true
 
 if [ $checklistii == "true" ]; then
     for ((i = 0; i < ${#appdirectories[@]}; i++)); do
