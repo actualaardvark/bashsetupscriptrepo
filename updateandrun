@@ -17,13 +17,6 @@ updateconfigfile(){
     fi
 }
 
-obtainadminpassword(){
-    if [ $passwordsource == "legacy" ]; then
-        read -p "Enter Admin Password (You'll only need to do this once): " adminpassword
-	    echo "$adminpassword" > password.conf
-    fi
-}
-
 executeremotescript(){
     curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Mac%20Guided%20Enrollment%20Script > "Mac Guided Enrollment Script"
     chmod +x "Mac Guided Enrollment Script"
@@ -31,12 +24,8 @@ executeremotescript(){
 }
 
 checkpasswordpresence(){
-    if [ ! -f  password.conf ]; then
-        obtainadminpassword
-    else
-    	executeremotescript
-    	exit 1
-    fi
+    executeremotescript
+    exit 1
 }
 
 checknetworkconnection(){
