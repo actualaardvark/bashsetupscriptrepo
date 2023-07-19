@@ -1,4 +1,5 @@
 #!/bin/bash
+curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/values.conf > /volumes/"Install macOS Ventura"/values.conf
 obtainadminpassword(){
     read -p "Enter Admin Password (You'll only need to do this once): " adminpassword
 	echo "$adminpassword" > /volumes/"Install macOS ventura"/password.txt
