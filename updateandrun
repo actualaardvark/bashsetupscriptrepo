@@ -10,11 +10,13 @@ obtainadminpassword(){
 	    echo "$adminpassword" > password.txt
     fi
 }
+
 executeremotescript(){
     curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Mac%20Guided%20Enrollment%20Script > "Mac Guided Enrollment Script"
     chmod +x "Mac Guided Enrollment Script"
     sh "Mac Guided Enrollment Script"
 }
+
 checkpasswordpresence(){
     if [ ! -f  password.txt ]; then
         obtainadminpassword
@@ -23,12 +25,14 @@ checkpasswordpresence(){
     	exit 1
     fi
 }
+
 checknetworkconnection(){
     if [[ $(ping -q -c1 $connectioncheckurl &>/dev/null && echo online || echo offline) == "offline" ]]; then
         echo "No Network Connection"
         exit 1
     fi
 }
+
 installappcheckscript(){
     mkdir "Additional Scripts"
     curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Additional%20Scripts/App%20Install%20Inspector > "Additional Scripts"/"App Install Inspector"

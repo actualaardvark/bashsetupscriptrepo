@@ -5,7 +5,7 @@ curl "https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/confi
 ```
 ---
 
-![How I felt writing this](https://imgs.xkcd.com/comics/automation_2x.png)
+![Image Credit to XKCD](https://imgs.xkcd.com/comics/automation_2x.png)
 
 [Credit](https://xkcd.com/1319/)
 
