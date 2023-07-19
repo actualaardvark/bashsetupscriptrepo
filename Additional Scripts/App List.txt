@@ -9,3 +9,4 @@ Microsoft OneNote.app
 Microsoft PowerPoint.app
 Numbers.app
 Pages.app
+Zoom.app
