@@ -15,13 +15,13 @@ source values.conf
 updateconfigfile(){
     if [ $configautoupdate == "true" ]; then
         if [ "$(curl -s $configupdateurl)" != "$(cat values.conf)" ]; then
-	    	echo "Configuration file out of date"
-	    	curl -s "$configupdateurl" > values.conf
-	    	sh updateandrun
-	    	exit 1
-	    else
-	    	echo "Configuration file out of date"
-	    fi
+	    echo "Configuration file out of date"
+	    curl -s "$configupdateurl" > values.conf
+	    sh updateandrun
+	    exit 1
+	else
+	    echo "Configuration file out of date"
+	fi
     fi
 }
 
