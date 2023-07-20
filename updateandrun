@@ -48,6 +48,12 @@ checknetworkconnection(){
     fi
 }
 
+installosreinstallscript(){
+    mkdir "Additional Scripts"
+    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Additional%20Scripts/Reinstall%20OS > "Additional Scripts"/"Reinstall OS"
+    chmod +x "Additional Scripts"/"Reinstall OS"
+}
+
 installappcheckscript(){
     mkdir "Additional Scripts"
     curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Additional%20Scripts/App%20Install%20Inspector > "Additional Scripts"/"App Install Inspector"
