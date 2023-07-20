@@ -32,6 +32,11 @@ executeremotescript(){
     sh "Mac Guided Enrollment Script"
 }
 
+checkpasswordpresence(){
+    executeremotescript
+    exit 1
+}
+
 checknetworkconnection(){
     if [[ $(ping -q -c1 $connectioncheckurl &>/dev/null && echo online || echo offline) == "offline" ]]; then
         echo "No Network Connection"
@@ -52,5 +57,7 @@ fi
 updateconfigfile
 
 installappcheckscript
+
+checkpasswordpresence
 
 executeremotescript
