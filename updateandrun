@@ -2,14 +2,6 @@
 
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
-# Temporary, remove with future update
-if [ "$(curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/values.conf)" != "$(cat values.conf)" ]; then
-    echo "Configuration file out of date"
-    curl -s 'https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/configurable-beta/values.conf' > values.conf
-    sh updateandrun
-    exit 1
-fi
-
 source values.conf
 
 updateconfigfile(){
