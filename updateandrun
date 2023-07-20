@@ -10,7 +10,7 @@ if [ ! -f values.conf ] || [ "$(curl -s https://raw.githubusercontent.com/actual
 	sh updateandrun
 	exit 1
 else
-	echo "Configuration file out of date"
+	echo "Configuration file is up to date"
 fi
 
 updateconfigfile(){
@@ -21,7 +21,7 @@ updateconfigfile(){
 	    sh updateandrun
 	    exit 1
 	else
-	    echo "Configuration file out of date"
+	    echo "Configuration file is up to date"
 	fi
     fi
 }
