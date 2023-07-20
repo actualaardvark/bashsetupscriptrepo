@@ -1,0 +1,4 @@
+#!/bin/bash
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+source values.conf
+cat password.conf | "Install macOS Ventura.app"/Contents/Resources/startosinstall --eraseinstall --agreetolicense --forcequitapps --newvolumename "Macintosh HD" --stdinpass
