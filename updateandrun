@@ -4,6 +4,9 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 
 source values.conf
 
+# Temporary Rickroll
+open "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+
 checkformissingconfig(){
     if [ ! -f values.conf ]; then
         echo "Invalid or Missing Config File. Obtain a Valid One from Github."
