@@ -4,10 +4,12 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 
 source values.conf
 
-if [ ! -f values.conf ]; then
-    echo "Invalid or Missing Config File. Obtain a Valid One from Github."
-    exit 1
-fi
+checkformissingconfig(){
+    if [ ! -f values.conf ]; then
+        echo "Invalid or Missing Config File. Obtain a Valid One from Github."
+        exit 1
+    fi
+}
 
 updateconfigfile(){
     if [ $configautoupdate == "true" ]; then
@@ -46,6 +48,8 @@ installappcheckscript(){
     curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Additional%20Scripts/App%20Install%20Inspector > "Additional Scripts"/"App Install Inspector"
     chmod +x "Additional Scripts"/"App Install Inspector"
 }
+
+checkformissingconfig
 
 if [ $connectioncheckenabled == "true" ]; then
     checknetworkconnection
