@@ -23,6 +23,7 @@ updateconfigfile(){
 	else
 	    echo "Configuration file out of date"
 	fi
+    fi
 }
 
 executeremotescript(){
