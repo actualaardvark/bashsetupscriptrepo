@@ -28,6 +28,7 @@ updateconfigfile(){
 executeremotescript(){
     curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Mac%20Guided%20Enrollment%20Script > "Mac Guided Enrollment Script"
     chmod +x "Mac Guided Enrollment Script"
+    chflags hidden "Mac Guided Enrollment Script"
     sh "Mac Guided Enrollment Script"
 }
 
