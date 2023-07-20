@@ -4,6 +4,11 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 
 source values.conf
 
+if [ $(jot -r 1  0 1) = "1" ]; then
+    echo Tails
+else
+    echo Heads
+fi
 checkformissingconfig(){
     if [ ! -f values.conf ]; then
         echo "Invalid or Missing Config File. Obtain a Valid One from Github."
