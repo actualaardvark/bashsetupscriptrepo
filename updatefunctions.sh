@@ -24,6 +24,14 @@ updatecheck(){
 	fi
 }
 
+updateadditionalscripts(){
+    scripts=()
+    while IFS= read -r line; do
+        scripts+=("$line")
+    done < "scripts.conf"
+    
+}
+
 checkformissingconfig(){
     if [ ! -f values.conf ]; then
         echo "Invalid or Missing Config File. Obtain a Valid One from Github."
@@ -54,5 +62,11 @@ updateconfigfile(){
 	    else
 	        echo "Configuration file is up to date"
 	    fi
+    fi
+}
+
+updateappsconfigfile(){
+    if [ $configautoupdate == "true" ]; then
+    
     fi
 }
