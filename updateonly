@@ -4,8 +4,9 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 
 source updatefunctions.sh
 
-installosreinstallscript
+if [ ! -d "Additional Scripts" ]; then
+    mkdir "Additional Scripts"
+fi
+
 
 installappcheckscript
-
-updatecheck

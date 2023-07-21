@@ -1,11 +1,12 @@
 #!/bin/bash
 
+source values.conf
+
 installappcheckscript(){
-    if [ ! -d "Additional Scripts" ]; then
-        mkdir "Additional Scripts"
+    if [ "$(curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Additional%20Scripts/App%20Install%20Inspector)" != "$(cat 'Additional Scripts'/'App Install Inspector')" ]; then
+        curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Additional%20Scripts/App%20Install%20Inspector > "Additional Scripts"/"App Install Inspector"
+        chmod +x "Additional Scripts"/"App Install Inspector"
     fi
-    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Additional%20Scripts/App%20Install%20Inspector > "Additional Scripts"/"App Install Inspector"
-    chmod +x "Additional Scripts"/"App Install Inspector"
 }
 
 updatecheck(){
@@ -37,11 +38,10 @@ checkformissingpassword(){
 }
 
 installosreinstallscript(){
-    if [ ! -d "Additional Scripts" ]; then
-        mkdir "Additional Scripts"
+    if [ "$(curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Additional%20Scripts/Reinstall%20OS)" != "$(cat 'Additional Scripts'/'Reinstall OS')" ]; then
+        curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Additional%20Scripts/Reinstall%20OS > "Additional Scripts"/"Reinstall OS"
+        chmod +x "Additional Scripts"/"Reinstall OS"
     fi
-    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Additional%20Scripts/Reinstall%20OS > "Additional Scripts"/"Reinstall OS"
-    chmod +x "Additional Scripts"/"Reinstall OS"
 }
 
 updateconfigfile(){
