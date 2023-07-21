@@ -1,6 +1,9 @@
 #!/bin/bash
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
+
+source uservariables.sh
 source values.conf
+
 if [ $(echo $(cut -d ":" -f2 <<< $(system_profiler SPHardwareDataType | grep "Activation Lock Status:"))) = "Enabled" ]; then
     echo "Activation Lock Enabled. Use Legacy Install Method."
     exit 1

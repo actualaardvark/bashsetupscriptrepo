@@ -2,6 +2,7 @@
 
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
+source uservariables.sh
 source values.conf
 
 curl -s "https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Additional%20Scripts/apps.conf" > "Additional Scripts"/"apps.conf"
