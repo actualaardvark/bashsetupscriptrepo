@@ -11,6 +11,18 @@ checkformissingconfig(){
     fi
 }
 
+downloadstructureimage(){
+    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/structure.conf > structure.conf
+    filestodownload=()
+    while IFS= read -r line; do
+        filestodownload+=("$line")
+    done < "Additional Scripts/apps.conf"
+    for ((i = 0; i < ${#filestodownload[@]}; i++)); do
+        curl -s  https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/$filestodownload[$i] > $filestodownload[$i]
+        chmod +x $filestodownload[$i]
+    done
+}
+
 updateconfigfile(){
     if [ $configautoupdate == "true" ]; then
         if [ "$(curl -s $configupdateurl)" != "$(cat values.conf)" ]; then
