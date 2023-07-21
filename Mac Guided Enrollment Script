@@ -48,7 +48,11 @@ userlevelcheck(){
 		echo "Promoting User to Admin"
 		echo "$adminpassword" | sudo -S -k dscl . -merge /Groups/admin GroupMembership $usernamebyid
 	fi
-	if [[ "$userlevel" == "NMS" || "$userlevel" == "NLS" ]]; then
+	if [[ "$userlevel" == "NMS" ]]; then
+		echo "Demoting User to Standard"
+		echo "$adminpassword" | sudo -S -k dseditgroup -o edit -d $usernamebyid -t user admin
+	fi
+	if [[ "$userlevel" == "NLS" ]]; then
 		echo "Demoting User to Standard"
 		echo "$adminpassword" | sudo -S -k dseditgroup -o edit -d $usernamebyid -t user admin
 	fi
