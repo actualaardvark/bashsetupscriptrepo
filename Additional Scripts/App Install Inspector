@@ -40,5 +40,6 @@ for ((i = 0; i < ${#appdirectories[@]}; i++)); do
         fi
     fi
 done
+clear
 done
 echo "$readyapps"'/'"$totalapps"" Apps Installed"
