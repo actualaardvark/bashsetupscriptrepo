@@ -4,21 +4,6 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 
 source values.conf
 
-updatecheck(){
-	if [ $updatecheck == "true" ]; then
-		# Replaces the old version with the new if the old copy is out of date
-		if [ "$(curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/updateandrun)" != "$(cat updateandrun)" ]; then
-			echo "Updater out of date"
-			curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/updateandrun > updateandrun
-			chmod +x updateandrun
-			sh updateandrun
-			exit 1
-		else
-			echo "Updater is on the latest version"
-		fi
-	fi
-}
-
 checklistrender () {
 	if [ $checklistge == "true" ]; then
 		# Loop through checklist items and display them with checkboxes
@@ -64,8 +49,6 @@ checklist=("Installer Update Check" "Username Check" "Obtain Admin Permissions" 
 checklist_status=(0 0 0 0 0 0 0)
 # Defines the user needed for the script to execute
 
-# Checks for updates
-updatecheck
 clear
 checklist_status=(1 0 0 0 0 0 0)
 checklistrender
