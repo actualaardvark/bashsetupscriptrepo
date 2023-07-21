@@ -10,7 +10,7 @@ curl -s "https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$g
 appdirectories=()
 while IFS= read -r line; do
     appdirectories+=("$line")
-done < "Additional Scripts/apps.conf"
+done < "scripts.conf"
 
 declare -a installedapps=()
 
