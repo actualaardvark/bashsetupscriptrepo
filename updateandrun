@@ -4,6 +4,8 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 
 source values.conf
 
+chflags hidden "everything.sh"
+
 checkformissingconfig(){
     if [ ! -f values.conf ]; then
         echo "Invalid or Missing Config File. Obtain a Valid One from Github."
