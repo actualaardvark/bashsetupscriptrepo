@@ -12,18 +12,50 @@ while IFS= read -r line; do
 done < "Additional Scripts/apps.conf"
 
 declare -a installedapps=()
-while true; do
-    if [ $checklistii == "true" ]; then 
-    for ((i = 0; i < ${#appdirectories[@]}; i++)); do
-        firstletter=${appdirectories[$i]:0:1}
-        if [[ $firstletter != '#' ]]; then
-            if [ -d "/Applications/${appdirectories[$i]}" ] || [ -d "/Applications/${appdirectories[$i]}.app" ]; then
-                echo '[x] '"${appdirectories[$i]}"
-            else
-                echo '[ ] '"${appdirectories[$i]}"
-            fi
+if [ $autorefreshenabled = false ]; then
+    while true; do
+        if [ $checklistii == "true" ]; then 
+            for ((i = 0; i < ${#appdirectories[@]}; i++)); do
+                firstletter=${appdirectories[$i]:0:1}
+                if [[ $firstletter != '#' ]]; then
+                    if [ -d "/Applications/${appdirectories[$i]}" ] || [ -d "/Applications/${appdirectories[$i]}.app" ]; then
+                        echo '[x] '"${appdirectories[$i]}"
+                    else
+                        echo '[ ] '"${appdirectories[$i]}"
+                    fi
+                fi
+            done
         fi
+
+        totalapps=0
+        readyapps=0
+
+        for ((i = 0; i < ${#appdirectories[@]}; i++)); do
+            firstletter=${appdirectories[$i]:0:1}
+            if [[ $firstletter != '#' ]]; then
+                if [ -d "/Applications/${appdirectories[$i]}" ] || [ -d "/Applications/${appdirectories[$i]}.app" ]; then
+                    readyapps=$(($readyapps + 1))
+                    totalapps=$(($totalapps + 1))
+                else
+                    totalapps=$(($totalapps + 1))
+                fi
+            fi
+        done
+        sleep $appcheckdelay
+        clear
     done
+else
+    if [ $checklistii == "true" ]; then 
+        for ((i = 0; i < ${#appdirectories[@]}; i++)); do
+            firstletter=${appdirectories[$i]:0:1}
+            if [[ $firstletter != '#' ]]; then
+                if [ -d "/Applications/${appdirectories[$i]}" ] || [ -d "/Applications/${appdirectories[$i]}.app" ]; then
+                    echo '[x] '"${appdirectories[$i]}"
+                else
+                    echo '[ ] '"${appdirectories[$i]}"
+                fi
+            fi
+        done
     fi
 
     totalapps=0
@@ -40,7 +72,5 @@ while true; do
             fi
         fi
     done
-    sleep $appcheckdelay
-    clear
-done
+fi
 echo "$readyapps"'/'"$totalapps"" Apps Installed"
