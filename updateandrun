@@ -30,7 +30,11 @@ downloadstructureimage(){
         echo ${filestodownload[$i]}
         downloadedfile=${filestodownload[$i]}
         if [ ! -f $downloadedfile ]; then
-            mkdir -p "${downloadedfile%/*}" && touch "$downloadedfile"
+            if [[ $downloadedfile == *"/"* ]]; then
+                mkdir -p "${downloadedfile%/*}" && touch "$downloadedfile"
+            else
+                touch "$downloadedfile"
+            fi
         fi
         curl -s  https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/${filestodownload[$i]} > ${filestodownload[$i]}
         chmod +x ${filestodownload[$i]}
