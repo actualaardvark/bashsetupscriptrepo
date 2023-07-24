@@ -37,31 +37,6 @@ downloadstructureimage(){
     done
 }
 
-updateconfigfile(){
-    if [ $configautoupdate == "true" ]; then
-        if [ "$(curl -s $configupdateurl)" != "$(cat values.conf)" ]; then
-	        echo "Configuration file out of date"
-	        curl -s "$configupdateurl" > values.conf
-	        sh updateandrun
-	        exit 1
-	    else
-	        echo "Configuration file is up to date"
-	    fi
-    fi
-}
-
-executeremotescript(){
-    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/Mac%20Guided%20Enrollment%20Script > "Mac Guided Enrollment Script"
-    chmod +x "Mac Guided Enrollment Script"
-    chflags hidden "Mac Guided Enrollment Script"
-    sh "Mac Guided Enrollment Script"
-}
-
-checkpasswordpresence(){
-    executeremotescript
-    exit 1
-}
-
 checknetworkconnection(){
     if [[ $(ping -q -c1 $connectioncheckurl &>/dev/null && echo online || echo offline) == "offline" ]]; then
         echo "No Network Connection"
@@ -79,10 +54,6 @@ downloadstructureimage
 
 migratepasswordfile
 
-updateconfigfile
-
-installappcheckscript
-
 checkpasswordpresence
 
-executeremotescript
+sh Mac-Guided-Enrollment-Script.sh
