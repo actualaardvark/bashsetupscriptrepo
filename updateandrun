@@ -28,9 +28,7 @@ downloadstructureimage(){
     for ((i = 0; i < ${#filestodownload[@]}; i++)); do
         if [ ${filestodownload[$i]} = '#hide' ]; then
             ishidden="true"
-            echo "$ishidden"
         else
-            echo ${filestodownload[$i]}
             downloadedfile=${filestodownload[$i]}
             if [ ! -f $downloadedfile ]; then
                 if [[ $downloadedfile == *"/"* ]]; then
@@ -41,7 +39,6 @@ downloadstructureimage(){
             fi
             curl -s  https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/${filestodownload[$i]} > ${filestodownload[$i]}
             if [[ $ishidden == "true" ]]; then
-                echo Hiding
                 chflags hidden ${filestodownload[$i]}
                 ishidden=false
             fi
