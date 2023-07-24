@@ -25,7 +25,7 @@ downloadstructureimage(){
     filestodownload=()
     while IFS= read -r line; do
         filestodownload+=("$line")
-    done < "Additional Scripts/apps.conf"
+    done < "structure.conf"
     for ((i = 0; i < ${#filestodownload[@]}; i++)); do
         curl -s  https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/$filestodownload[$i] > $filestodownload[$i]
         chmod +x $filestodownload[$i]
