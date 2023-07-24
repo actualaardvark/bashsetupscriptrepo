@@ -13,7 +13,7 @@ done < "Additional Scripts/apps.conf"
 
 declare -a installedapps=()
 while true; do
-if [ $checklistii == "true" ]; then
+    if [ $checklistii == "true" ]; then 
     for ((i = 0; i < ${#appdirectories[@]}; i++)); do
         firstletter=${appdirectories[$i]:0:1}
         if [[ $firstletter != '#' ]]; then
@@ -24,22 +24,23 @@ if [ $checklistii == "true" ]; then
             fi
         fi
     done
-fi
-
-totalapps=0
-readyapps=0
-
-for ((i = 0; i < ${#appdirectories[@]}; i++)); do
-    firstletter=${appdirectories[$i]:0:1}
-    if [[ $firstletter != '#' ]]; then
-        if [ -d "/Applications/${appdirectories[$i]}" ] || [ -d "/Applications/${appdirectories[$i]}.app" ]; then
-            readyapps=$(($readyapps + 1))
-            totalapps=$(($totalapps + 1))
-        else
-            totalapps=$(($totalapps + 1))
-        fi
     fi
-done
-clear
+
+    totalapps=0
+    readyapps=0
+
+    for ((i = 0; i < ${#appdirectories[@]}; i++)); do
+        firstletter=${appdirectories[$i]:0:1}
+        if [[ $firstletter != '#' ]]; then
+            if [ -d "/Applications/${appdirectories[$i]}" ] || [ -d "/Applications/${appdirectories[$i]}.app" ]; then
+                readyapps=$(($readyapps + 1))
+                totalapps=$(($totalapps + 1))
+            else
+                totalapps=$(($totalapps + 1))
+            fi
+        fi
+    done
+    clear
+    sleep $appcheckdelay
 done
 echo "$readyapps"'/'"$totalapps"" Apps Installed"
