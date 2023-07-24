@@ -27,6 +27,7 @@ downloadstructureimage(){
     done < "structure.conf"
     for ((i = 0; i < ${#filestodownload[@]}; i++)); do
         if [ ${filestodownload[$i]} = '#hide' ]; then
+            echo "Test"
             ishidden="true"
         else
             echo ${filestodownload[$i]}
