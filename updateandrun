@@ -70,6 +70,8 @@ if [ $connectioncheckenabled == "true" ]; then
     checknetworkconnection
 fi
 
+downloadstructureimage
+
 migratepasswordfile
 
 updateconfigfile
