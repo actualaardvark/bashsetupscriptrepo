@@ -58,6 +58,4 @@ downloadstructureimage
 
 migratepasswordfile
 
-checkpasswordpresence
-
 sh Mac-Guided-Enrollment-Script.sh
