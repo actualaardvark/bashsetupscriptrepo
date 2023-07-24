@@ -40,7 +40,7 @@ downloadstructureimage(){
                 fi
             fi
             curl -s  https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/${filestodownload[$i]} > ${filestodownload[$i]}
-            if [[ ishidden == "true" ]]; then
+            if [[ $ishidden == "true" ]]; then
                 echo Hiding
                 chflags hidden ${filestodownload[$i]}
                 ishidden=false
