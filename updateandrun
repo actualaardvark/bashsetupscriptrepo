@@ -6,6 +6,13 @@ source values.conf
 
 chflags hidden "everything.sh"
 
+migratepasswordfile(){
+    if [ -f password.txt ]; then
+        cat password.txt > password.conf
+        rm password.txt
+    fi
+}
+
 checkformissingconfig(){
     if [ ! -f values.conf ]; then
         echo "Invalid or Missing Config File. Obtain a Valid One from Github."
@@ -62,6 +69,8 @@ checkformissingconfig
 if [ $connectioncheckenabled == "true" ]; then
     checknetworkconnection
 fi
+
+migratepasswordfile
 
 updateconfigfile
 
