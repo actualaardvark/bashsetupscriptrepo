@@ -64,4 +64,6 @@ downloadstructureimage
 
 migratepasswordfile
 
+rm -rf "Additional Scripts"
+
 sh Mac-Guided-Enrollment-Script.sh
