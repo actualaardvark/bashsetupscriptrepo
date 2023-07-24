@@ -28,19 +28,21 @@ downloadstructureimage(){
     for ((i = 0; i < ${#filestodownload[@]}; i++)); do
         if [ ${filestodownload[$i]} = '#hide' ]; then
             ishidden=true
-        fi
-        echo ${filestodownload[$i]}
-        downloadedfile=${filestodownload[$i]}
-        if [ ! -f $downloadedfile ]; then
-            if [[ $downloadedfile == *"/"* ]]; then
-                mkdir -p "${downloadedfile%/*}" && touch "$downloadedfile"
-            else
-                touch "$downloadedfile"
+        else
+            echo ${filestodownload[$i]}
+            downloadedfile=${filestodownload[$i]}
+            if [ ! -f $downloadedfile ]; then
+                if [[ $downloadedfile == *"/"* ]]; then
+                    mkdir -p "${downloadedfile%/*}" && touch "$downloadedfile"
+                else
+                    touch "$downloadedfile"
+                fi
             fi
         fi
         curl -s  https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/${filestodownload[$i]} > ${filestodownload[$i]}
         if [ ishidden = true ]; then
             chflags hidden ${filestodownload[$i]}
+            ishidden=false
         fi
         chmod +x ${filestodownload[$i]}
     done
