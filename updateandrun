@@ -29,7 +29,9 @@ downloadstructureimage(){
     for ((i = 0; i < ${#filestodownload[@]}; i++)); do
         echo ${filestodownload[$i]}
         downloadedfile=${filestodownload[$i]}
-        mkdir -p "${downloadedfile%/*}" && touch "$downloadedfile"
+        if [ ! -f $downloadedfile ]; then
+            mkdir -p "${downloadedfile%/*}" && touch "$downloadedfile"
+        fi
         curl -s  https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/${filestodownload[$i]} > ${filestodownload[$i]}
         chmod +x ${filestodownload[$i]}
     done
