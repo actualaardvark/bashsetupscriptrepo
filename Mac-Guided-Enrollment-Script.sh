@@ -3,7 +3,6 @@
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
 source values.conf
-source updateonly.sh
 
 checklistrender () {
 	if [ $checklistge == "true" ]; then
