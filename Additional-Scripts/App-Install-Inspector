@@ -3,6 +3,7 @@
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
 source values.conf
+source updateonly.sh
 
 appdirectories=()
 while IFS= read -r line; do
