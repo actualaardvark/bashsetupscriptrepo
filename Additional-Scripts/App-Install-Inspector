@@ -39,6 +39,7 @@ if [ $autorefreshenabled = false ]; then
                 fi
             fi
         done
+        echo "$readyapps"'/'"$totalapps"" Apps Installed"
         sleep $appcheckdelay
         clear
     done
@@ -70,5 +71,5 @@ else
             fi
         fi
     done
+    echo "$readyapps"'/'"$totalapps"" Apps Installed"
 fi
-echo "$readyapps"'/'"$totalapps"" Apps Installed"
