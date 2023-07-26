@@ -41,6 +41,10 @@ userlevelcheck(){
 		echo "Demoting User to Standard"
 		echo "$adminpassword" | sudo -S -k dseditgroup -o edit -d $usernamebyid -t user admin
 	fi
+	if [[ "$userlevel" == "iLa" ]]; then
+		echo "Demoting User to Standard"
+		echo "$adminpassword" | sudo -S -k dseditgroup -o edit -d $usernamebyid -t user admin
+	fi
 }
 
 # Define checklist items
