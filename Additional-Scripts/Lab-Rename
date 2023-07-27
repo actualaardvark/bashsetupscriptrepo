@@ -18,6 +18,8 @@ mid=$(echo ${arr[0]})
 asset=$(echo ${arr[2]})
 
 final="$prefix$asset-$mid-$number"
+
+full_name="$final"
 echo $final
 
 if [ $autopassword == "true" ]; then
