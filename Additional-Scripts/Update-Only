@@ -1,6 +1,10 @@
 #!/bin/bash
 
+echo "Updating Scripts"
+
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
 source values.conf
 source update.sh
+
+echo "Complete"
