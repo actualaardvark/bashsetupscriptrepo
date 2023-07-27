@@ -3,6 +3,7 @@
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
 source values.conf
+source update.sh
 
 # NMS<Asset Tag>-iLab<Color>-<Number>
 # iLabRed-5-12759
