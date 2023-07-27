@@ -45,3 +45,9 @@ if [ $autopassword == "true" ]; then
 else
 	sudo scutil --set HostName "$full_name"
 fi
+
+if [ $autopassword == "true" ]; then
+	echo "$adminpassword" | sudo -S -k scutil --set HostName "$full_name"
+else
+	sudo scutil --set HostName "$full_name"
+fi
