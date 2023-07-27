@@ -23,25 +23,25 @@ real="$final"
 echo $final
 
 if [ $autopassword == "true" ]; then
-	echo "$adminpassword" | sudo -S -k scutil --set ComputerName "$full_name"
+	echo "$adminpassword" | sudo -S -k scutil --set ComputerName "$real"
 else
 	sudo scutil --set ComputerName "$real"
 fi
 
 if [ $autopassword == "true" ]; then
-	echo "$adminpassword" | sudo -S -k scutil --set LocalHostName "$full_name"
+	echo "$adminpassword" | sudo -S -k scutil --set LocalHostName "$real"
 else
 	sudo scutil --set LocalHostName "$real"
 fi
 
 if [ $autopassword == "true" ]; then
-	echo "$adminpassword" | sudo -S -k scutil --set HostName "$full_name"
+	echo "$adminpassword" | sudo -S -k scutil --set HostName "$real"
 else
 	sudo scutil --set HostName "$real"
 fi
 
 if [ $autopassword == "true" ]; then
-	echo "$adminpassword" | sudo -S -k scutil --set HostName "$full_name"
+	echo "$adminpassword" | sudo -S -k scutil --set HostName "$real"
 else
 	sudo scutil --set HostName "$real"
 fi
@@ -50,4 +50,10 @@ if [ $autopassword == "true" ]; then
 	echo "$adminpassword" | sudo -S -k profiles renew -type enrollment
 else
 	sudo profiles renew -type enrollment
+fi
+
+if [ $autopassword == "true" ]; then
+	echo "$adminpassword" | sudo -S -k dscl . -change /Users/$(id -un 502) RealName "$full_name" "$real"
+else
+	sudo dscl . -change /Users/tatrose RealName "$full_name" "$real"
 fi
