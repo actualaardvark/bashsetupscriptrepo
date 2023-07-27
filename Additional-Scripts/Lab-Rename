@@ -19,31 +19,31 @@ asset=$(echo ${arr[2]})
 
 final="$prefix$asset-$mid-$number"
 
-full_name="$final"
+real="$final"
 echo $final
 
 if [ $autopassword == "true" ]; then
 	echo "$adminpassword" | sudo -S -k scutil --set ComputerName "$full_name"
 else
-	sudo scutil --set ComputerName "$full_name"
+	sudo scutil --set ComputerName "$real"
 fi
 
 if [ $autopassword == "true" ]; then
 	echo "$adminpassword" | sudo -S -k scutil --set LocalHostName "$full_name"
 else
-	sudo scutil --set LocalHostName "$full_name"
+	sudo scutil --set LocalHostName "$real"
 fi
 
 if [ $autopassword == "true" ]; then
 	echo "$adminpassword" | sudo -S -k scutil --set HostName "$full_name"
 else
-	sudo scutil --set HostName "$full_name"
+	sudo scutil --set HostName "$real"
 fi
 
 if [ $autopassword == "true" ]; then
 	echo "$adminpassword" | sudo -S -k scutil --set HostName "$full_name"
 else
-	sudo scutil --set HostName "$full_name"
+	sudo scutil --set HostName "$real"
 fi
 
 if [ $autopassword == "true" ]; then
