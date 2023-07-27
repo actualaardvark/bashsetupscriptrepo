@@ -4,7 +4,7 @@
 
 ## Installer
 ```bash
-curl "https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/updateandrun" > /volumes/"install macos ventura"/updateandrun && chmod +x /volumes/"install macos ventura"/updateandrun
+curl "https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/updateandrun" > /volumes/$(df -h | grep -v "/System" | grep "/Volumes") | awk -F'/Volumes/' '{print $2}'/updateandrun && chmod +x /volumes/"install macos ventura"/updateandrun
 ```
 
 ---
