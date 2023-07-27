@@ -1,0 +1,21 @@
+#!/bin/bash
+
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+
+source values.conf
+
+# NMS<Asset Tag>-iLab<Color>-<Number>
+# iLabRed-5-12759
+
+arr=(${full_name//-/ })
+
+number=$(echo ${arr[1]})
+
+prefix="NMS"
+
+mid=$(echo ${arr[0]})
+
+asset=$(echo ${arr[2]})
+
+final="$prefix$asset-$mid-$number"
+echo $final
