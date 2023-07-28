@@ -8,4 +8,4 @@ if [ $(echo $(cut -d ":" -f2 <<< $(system_profiler SPHardwareDataType | grep "Ac
     echo "Activation Lock Enabled. Use Legacy Install Method."
     exit 1
 fi
-echo $adminpassword | "Install macOS Ventura.app"/Contents/Resources/startosinstall --eraseinstall --agreetolicense --forcequitapps --newvolumename "Macintosh HD" --stdinpass
+echo $adminpassword | Install\ macOS\ *.app/Contents/Resources/startosinstall --eraseinstall --agreetolicense --forcequitapps --newvolumename "Macintosh HD" --stdinpass
