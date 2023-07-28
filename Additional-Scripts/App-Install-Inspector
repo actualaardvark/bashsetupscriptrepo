@@ -8,7 +8,7 @@ source update.sh
 appdirectories=()
 while IFS= read -r line; do
     appdirectories+=("$line")
-done < "Additional-Scripts/apps.conf"
+done < "apps.conf"
 
 declare -a installedapps=()
 if [ $autorefreshenabled = false ]; then
