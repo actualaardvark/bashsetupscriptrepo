@@ -4,6 +4,12 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 
 source values.conf
 
+checkadminpermission(){
+	if [ "$(echo $adminpassword | sudo -S -k whoami)" != "root" ]; then
+		echo "admin"
+	fi
+}
+
 checklistrender () {
 	if [ $checklistge == "true" ]; then
 		# Loop through checklist items and display them with checkboxes
