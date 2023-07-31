@@ -2,7 +2,7 @@
 
 echo "Updating Scripts"
 
-cd "$(dirname "${BASH_SOURCE[0]}")/.."
+cd "$(dirname "${BASH_SOURCE[0]}")/.." || echo "Directory Access Failed" && exit 1
 
 source values.conf
 source update.sh

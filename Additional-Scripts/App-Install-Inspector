@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd "$(dirname "${BASH_SOURCE[0]}")/.."
+cd "$(dirname "${BASH_SOURCE[0]}")/.." || echo "Directory Access Failed" && exit 1
 
 source values.conf
 source update.sh
@@ -10,7 +10,7 @@ while IFS= read -r line; do
     appdirectories+=("$line")
 done < "apps.conf"
 
-declare -a installedapps=()
+# declare -a installedapps=()
 if [ $autorefreshenabled = false ]; then
     while true; do
         if [ $checklistii == "true" ]; then 
