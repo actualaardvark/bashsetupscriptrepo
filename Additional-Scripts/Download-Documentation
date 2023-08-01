@@ -27,8 +27,9 @@ downloadstructureimage(){
                     touch "$downloadedfile"
                 fi
             fi
-            curl -s  https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/${filestodownload[$i]}.md > ${filestodownload[$i]}.md
+            curl -s  https://raw.githubusercontent.com/actualaardvark/bashsetupscriptdocs/$gitupdatebranch/${filestodownload[$i]} > ${filestodownload[$i]}.md
         fi
     done
 }
+
 downloadstructureimage
