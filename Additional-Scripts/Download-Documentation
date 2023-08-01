@@ -31,3 +31,4 @@ downloadstructureimage(){
         fi
     done
 }
+downloadstructureimage
