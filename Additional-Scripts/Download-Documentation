@@ -3,8 +3,8 @@
 mkdir "$(dirname "${BASH_SOURCE[0]}")/../Docs"
 cd "$(dirname "${BASH_SOURCE[0]}")/../Docs" || echo "Directory Access Failed" && exit 1
 
-source values.conf
-source update.sh
+source ../values.conf
+source ../update.sh
 
 echo "Downloading Documentation"
 
