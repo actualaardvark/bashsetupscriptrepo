@@ -20,7 +20,7 @@ downloadstructureimage(){
             ishidden="true"
         else
             downloadedfile=${filestodownload[$i]}
-            if [ ! -f $downloadedfile ]; then
+            if [ ! -f "$downloadedfile" ]; then
                 if [[ $downloadedfile == *"/"* ]]; then
                     mkdir -p "${downloadedfile%/*}" && touch "$downloadedfile"
                 else
