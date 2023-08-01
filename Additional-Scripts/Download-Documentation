@@ -25,6 +25,6 @@ for ((i = 0; i < ${#filestodownload[@]}; i++)); do
                 touch "$downloadedfile"
             fi
         fi
-        curl -s  https://raw.githubusercontent.com/actualaardvark/bashsetupscriptdocs/$gitupdatebranch/${filestodownload[$i]} > ${filestodownload[$i]}.md
+        curl -s  https://raw.githubusercontent.com/actualaardvark/bashsetupscriptdocs/main/${filestodownload[$i]} > ${filestodownload[$i]}.md
     fi
 done
