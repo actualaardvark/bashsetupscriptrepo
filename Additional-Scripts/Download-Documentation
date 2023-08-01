@@ -7,7 +7,7 @@ source ../values.conf
 
 echo "Downloading Documentation"
 
-curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/structure.conf > structure.conf
+curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/structure.conf > structure.conf
 filestodownload=()
 ishidden="false"
 while IFS= read -r line; do
