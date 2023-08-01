@@ -7,28 +7,24 @@ source ../values.conf
 
 echo "Downloading Documentation"
 
-downloadstructureimage(){
-    curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/structure.conf > structure.conf
-    filestodownload=()
-    ishidden="false"
-    while IFS= read -r line; do
-        filestodownload+=("$line")
-    done < "structure.conf"
-    for ((i = 0; i < ${#filestodownload[@]}; i++)); do
-        if [ ${filestodownload[$i]} = '#hide' ]; then
-            ishidden="true"
-        else
-            downloadedfile=${filestodownload[$i]}
-            if [ ! -f "$downloadedfile" ]; then
-                if [[ $downloadedfile == *"/"* ]]; then
-                    mkdir -p "${downloadedfile%/*}" && touch "$downloadedfile"
-                else
-                    touch "$downloadedfile"
-                fi
+curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/structure.conf > structure.conf
+filestodownload=()
+ishidden="false"
+while IFS= read -r line; do
+    filestodownload+=("$line")
+done < "structure.conf"
+for ((i = 0; i < ${#filestodownload[@]}; i++)); do
+    if [ ${filestodownload[$i]} = '#hide' ]; then
+        ishidden="true"
+    else
+        downloadedfile=${filestodownload[$i]}
+        if [ ! -f "$downloadedfile" ]; then
+            if [[ $downloadedfile == *"/"* ]]; then
+                mkdir -p "${downloadedfile%/*}" && touch "$downloadedfile"
+            else
+                touch "$downloadedfile"
             fi
-            curl -s  https://raw.githubusercontent.com/actualaardvark/bashsetupscriptdocs/$gitupdatebranch/${filestodownload[$i]} > ${filestodownload[$i]}.md
         fi
-    done
-}
-
-downloadstructureimage
+        curl -s  https://raw.githubusercontent.com/actualaardvark/bashsetupscriptdocs/$gitupdatebranch/${filestodownload[$i]} > ${filestodownload[$i]}.md
+    fi
+done
