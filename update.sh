@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd "$(dirname "${BASH_SOURCE[0]}")" || echo "Directory Access Failed" && exit 1
+cd "$(dirname "${BASH_SOURCE[0]}")"
 
 source values.conf
 
