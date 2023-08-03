@@ -1,5 +1,19 @@
 #!/bin/bash
 
+echo "DO NOT run this script on a non-ILab device. Script will run in 5 seconds."
+
+echo "5"
+sleep 1
+echo 4
+sleep 1
+echo 3
+sleep 1
+echo 2
+sleep 1
+echo 1
+sleep 1
+echo "Running..."
+
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
 source values.conf
@@ -58,3 +72,4 @@ if [ $autopassword == "true" ]; then
 else
 	sudo dscl . -change /Users/tatrose RealName "$full_name" "$real"
 fi
+echo "Rename Complete"
