@@ -3,11 +3,9 @@
 mkdir "$(dirname "${BASH_SOURCE[0]}")/../Docs"
 cd "$(dirname "${BASH_SOURCE[0]}")/.." || echo "Directory Access Failed" && exit 1
 
-source values.conf
-
 echo "Downloading Documentation"
 
-curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/structure.conf > structure.conf
+curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/structure.conf > structure.conf
 filestodownload=()
 ishidden="false"
 while IFS= read -r line; do
@@ -17,7 +15,7 @@ for ((i = 0; i < ${#filestodownload[@]}; i++)); do
     if [ ${filestodownload[$i]} = '#hide' ]; then
         ishidden="true"
     else
-        downloadedfile=${filestodownload[$i]}
+        downloadedfile="${filestodownload[$i]}.md"
         if [ ! -f "$downloadedfile" ]; then
             if [[ $downloadedfile == *"/"* ]]; then
                 mkdir -p "${downloadedfile%/*}" && touch "$downloadedfile"
@@ -25,6 +23,6 @@ for ((i = 0; i < ${#filestodownload[@]}; i++)); do
                 touch "$downloadedfile"
             fi
         fi
-        curl -s  https://raw.githubusercontent.com/actualaardvark/bashsetupscriptdocs/main/${filestodownload[$i]} > "Docs/${filestodownload[$i]}.md"
+        curl -s  https://raw.githubusercontent.com/actualaardvark/bashsetupscriptdocs/main/$downloadedfile > "Docs/${filestodownload[$i]}.md"
     fi
 done
