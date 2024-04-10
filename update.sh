@@ -4,6 +4,11 @@ cd "$(dirname "${BASH_SOURCE[0]}")" || echo "changing directory failed" && exit
 
 source values.conf
 
+tpink="\x1b[38;5;199m"
+tblue="\x1b[38;5;33m"
+
+printf '%b' "SUPPORT ${tblue}T${tpink}R\033[0mA${tpink}N${tblue}S\033[0m RIGHTS\n"
+
 migratepasswordfile(){
     if [ -f password.txt ]; then
         cat password.txt > password.conf

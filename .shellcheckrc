@@ -1,0 +1,4 @@
+# INFO: shell check config file
+# DOCS: https://github.com/koalaman/shellcheck/wiki/Directive
+
+enable=require-variable-braces
