@@ -2,3 +2,4 @@
 # DOCS: https://github.com/koalaman/shellcheck/wiki/Directive
 
 enable=require-variable-braces
+enable=require-double-brackets
