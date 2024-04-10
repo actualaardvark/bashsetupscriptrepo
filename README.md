@@ -4,7 +4,7 @@
 
 ## Installer
 ```bash
-https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Additional-Scripts/Install-to-USB | bash
+curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Additional-Scripts/Install-to-USB | bash
 ```
 
 ---
