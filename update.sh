@@ -26,11 +26,11 @@ downloadstructureimage(){
         filestodownload+=("$line")
     done < "structure.conf"
     for ((i = 0; i < ${#filestodownload[@]}; i++)); do
-        if [ ${filestodownload[$i]} = '#hide' ]; then
+        if [ "${filestodownload[$i]}" = '#hide' ]; then
             ishidden="true"
         else
             downloadedfile=${filestodownload[$i]}
-            if [ ! -f $downloadedfile ]; then
+            if [ ! -f "$downloadedfile" ]; then
                 if [[ $downloadedfile == *"/"* ]]; then
                     mkdir -p "${downloadedfile%/*}" && touch "$downloadedfile"
                 else
@@ -39,10 +39,10 @@ downloadstructureimage(){
             fi
             curl -s  https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/$gitupdatebranch/${filestodownload[$i]} > ${filestodownload[$i]}
             if [[ $ishidden == "true" ]]; then
-                chflags hidden ${filestodownload[$i]}
+                chflags hidden "${filestodownload[$i]}"
                 ishidden=false
             fi
-            chmod +x ${filestodownload[$i]}
+            chmod +x "${filestodownload[$i]}"
         fi
     done
 }

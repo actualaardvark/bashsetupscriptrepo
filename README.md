@@ -2,6 +2,10 @@
 
 ---
 
+install shellcheck for better formatting and language support
+
+---
+
 ## Installer
 ```bash
 curl -s https://raw.githubusercontent.com/actualaardvark/bashsetupscriptrepo/main/Additional-Scripts/Install-to-USB | bash
