@@ -3,6 +3,7 @@
 ---
 
 install shellcheck for better formatting and language support
+an emacs package is available [here](https://github.com/federicotdn/flymake-shellcheck)
 
 ---
 
